@@ -1,0 +1,18 @@
+.button {
+  width: 100%;
+  color: #ffffff;
+  background-color: #3369f3;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 37px;
+  min-height: 37px;
+  border: 0;
+  box-shadow: 0;
+  display: block;
+  text-align: center;
+
+  &--white {
+    color: #3369f3;
+    background-color: #ffffff;
+  }
+}

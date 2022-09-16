@@ -1,0 +1,18 @@
+{
+  "fields": [
+    {
+      "name": "login",
+      "placeholderText": "Login",
+      "type": "text",
+      "errorText": "Incorrect login",
+      "hasError": true
+    },
+    {
+      "name": "password",
+      "placeholderText": "Password",
+      "type": "password",
+      "errorText": "Incorrect password",
+      "hasError": false
+    }
+  ]
+}

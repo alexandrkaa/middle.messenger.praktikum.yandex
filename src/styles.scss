@@ -1,0 +1,9 @@
+body,
+html {
+  height: 100%;
+  font-family: Inter;
+}
+
+@import "./partials/button/button.scss";
+@import "./layouts/enter/enter.scss";
+@import "./partials/input-field-block/input-field-block.scss";

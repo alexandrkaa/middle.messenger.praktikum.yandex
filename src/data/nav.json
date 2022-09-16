@@ -1,0 +1,12 @@
+{
+  "pages": [
+    {
+      "url": "/src/layouts/enter/signin.hbs",
+      "title": "Sign In"
+    },
+    {
+      "url": "/src/layouts/enter/signup.hbs",
+      "title": "Sign Up"
+    }
+  ]
+}
