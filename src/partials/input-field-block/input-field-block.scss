@@ -5,6 +5,10 @@
   min-height: 52px;
   position: relative;
   padding: 5px 0;
+
+  &:nth-last-child(2) {
+    margin-bottom: 20px;
+  }
 }
 
 .field-block__text-input {
@@ -16,17 +20,21 @@
   margin: 0;
   margin-top: 20px;
   padding-bottom: 5px;
-  border-bottom: 1px solid #3369f3;
+  border-bottom: 1px solid $blue;
   box-shadow: none;
-  color: #1e1e1e;
+  color: $black;
 
   &::placeholder {
-    color: #999999;
+    color: $grey;
+  }
+
+  .field-block--has-error &[type="password"] {
+    color: $red;
   }
 }
 
 .field-block__error {
-  color: #ff2f2f;
+  color: $red;
   font-size: 8px;
   line-height: 8px;
   display: none;
@@ -42,7 +50,7 @@
 .field-block__placeholder {
   font-size: 9px;
   line-height: 9px;
-  color: #999999;
+  color: $grey;
   display: none;
   position: absolute;
   top: 8px;

@@ -39,8 +39,8 @@
       "name": "password",
       "placeholderText": "Password",
       "type": "password",
-      "errorText": "Incorrect password",
-      "hasError": false
+      "errorText": "",
+      "hasError": true
     },
     {
       "name": "password2",

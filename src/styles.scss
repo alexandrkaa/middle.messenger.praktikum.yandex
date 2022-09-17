@@ -4,6 +4,11 @@ html {
   font-family: Inter;
 }
 
+$blue: #3369f3;
+$red: #ff2f2f;
+$grey: #999999;
+$black: #1e1e1e;
+
 @import "./partials/button/button.scss";
 @import "./layouts/enter/enter.scss";
 @import "./partials/input-field-block/input-field-block.scss";
