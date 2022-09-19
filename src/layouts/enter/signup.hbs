@@ -13,10 +13,8 @@
             {{> input-field-block/input-field-block}}
           {{/each}}
           <div class="enter-form__buttons-block">
-            <button type="submit" class="button enter-form__submit">
-              Create account
-            </button>
-            <a href="./signin.hbs" class="button button--white">Sign In</a>
+            {{> button/button class="enter-form__submit" type="submit" title="Create account"}}
+            {{> link/link class="enter-form__link" href="./signin.hbs" title="Sign In"}}
           </div>
         </form>
       </article>

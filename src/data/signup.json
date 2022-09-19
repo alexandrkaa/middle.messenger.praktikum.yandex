@@ -31,7 +31,7 @@
     {
       "name": "phone",
       "placeholderText": "Phone",
-      "type": "phone",
+      "type": "tel",
       "errorText": "",
       "hasError": false
     },

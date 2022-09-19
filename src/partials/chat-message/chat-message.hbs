@@ -1,0 +1,11 @@
+<li
+  class="chat-text-block__chat-message{{#if this.self}} chat-text-block__chat-message--self{{/if}} chat-message{{#if this.self}} chat-message--self{{/if}}"
+>
+  <p class="chat-message__content">{{this.text}}</p>
+  <span
+    class="chat-message__status chat-message__status--{{this.status}}"
+  ></span>
+  <time datetime="{{this.datetime}}" class="chat-message__time"
+    >{{this.time}}</time
+  >
+</li>
