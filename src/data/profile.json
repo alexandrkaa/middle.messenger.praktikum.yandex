@@ -1,0 +1,60 @@
+{
+  "fields": [
+    {
+      "title": "E-mail",
+      "value": "mail@gmail.com",
+      "formName": "email",
+      "type": "email"
+    },
+    {
+      "title": "Login",
+      "value": "avital",
+      "formName": "login",
+      "type": "text"
+    },
+    {
+      "title": "Avital",
+      "value": "Name",
+      "formName": "first_name",
+      "type": "text"
+    },
+    {
+      "title": "Andriani",
+      "value": "Lastname",
+      "formName": "second_name",
+      "type": "text"
+    },
+    {
+      "title": "Nickname",
+      "value": "avital",
+      "formName": "display_name",
+      "type": "text"
+    },
+    {
+      "title": "Phone",
+      "value": "+7 901 123 45 67",
+      "formName": "phone",
+      "type": "tel"
+    }
+  ],
+  "passwordFields": [
+    {
+      "title": "Password",
+      "value": "mail@gmail.com",
+      "formName": "oldPassword",
+      "type": "password"
+    },
+    {
+      "title": "Repeat password",
+      "value": "mail@gmail.com",
+      "formName": "oldPassword2",
+      "type": "password"
+    },
+    {
+      "title": "New password",
+      "value": "mail@gmail.com",
+      "formName": "newPassword",
+      "type": "password"
+    }
+  ]
+}

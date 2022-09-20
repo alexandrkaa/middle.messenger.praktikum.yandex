@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {{> meta}}
+    <title>Empty chat</title>
+  </head>
+  <body>
+    <main class="profile-page">
+      <article class="profile">
+        <a href="/" class="profile__back">
+          <span class="visually-hidden">Go back</span>
+        </a>
+        <section class="profile-main">
+          <img
+            class="profile-main__avatar"
+            src="https://via.placeholder.com/130"
+          />
+          <h2 class="profile__person-name">Avital</h2>
+          <form class="profile__form profile-form">
+            {{#each profile.fields}}
+            {{> profile-block/profile-block}}
+            {{/each}}
+          </form>
+          <section class="profile-form">
+            <div class="profile-block profile-block--link">
+              <a href="./profile-edit.hbs" class="link">Update profile</a>
+            </div>
+            <div class="profile-block">
+              <a href="./profile-password.hbs" class="link">Update password</a>
+            </div>
+            <div>
+              <a href="#" class="link link--red">Logout</a>
+            </div>
+          </section>
+        </section>
+      </article>
+    </main>
+  </body>
+</html>

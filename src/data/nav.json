@@ -31,6 +31,18 @@
     {
       "url": "/src/layouts/chat/chat-att.hbs",
       "title": "Chat attachment"
+    },
+    {
+      "url": "/src/layouts/profile/profile.hbs",
+      "title": "Profile"
+    },
+    {
+      "url": "/src/layouts/profile/profile-edit.hbs",
+      "title": "Profile edit fields"
+    },
+    {
+      "url": "/src/layouts/profile/profile-password.hbs",
+      "title": "Profile set password"
     }
   ]
 }

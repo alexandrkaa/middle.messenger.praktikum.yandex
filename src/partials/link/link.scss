@@ -2,8 +2,13 @@
   color: $blue;
   font-size: 13px;
   line-height: 13px;
-}
+  text-decoration: none;
 
-.enter-form__link {
-  margin: 10px auto;
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &--red {
+    color: #ff0000;
+  }
 }
