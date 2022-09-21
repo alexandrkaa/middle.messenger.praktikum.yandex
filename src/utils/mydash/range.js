@@ -1,11 +1,9 @@
 export function range(start, end, step, fromRight) {
   // TODO: добавить проверку на типы
-  let _start, _stop, _step;
+  let _start = toFinite(start),
+    _stop = end,
+    _step = step;
   const result = [];
-
-  _start = toFinite(start);
-  _stop = end;
-  _step = step;
 
   if (_stop === undefined) {
     _stop = _start;
@@ -26,10 +24,8 @@ export function range(start, end, step, fromRight) {
 
   let index = -1;
   let length = Math.max(Math.ceil((_stop - _start) / (_step || 1)), 0);
-  // console.log(_start, _stop, _step, length);
 
   while (length--) {
-    // result[++index] = _start;
     result[fromRight ? length : ++index] = _start;
     _start += _step;
   }

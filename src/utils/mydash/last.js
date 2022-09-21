@@ -8,5 +8,3 @@ export const last = (list) => {
   }
   return undefined;
 };
-
-console.log(last([1]));
