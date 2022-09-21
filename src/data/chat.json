@@ -1,0 +1,52 @@
+{
+  "tabs": [
+    {
+      "selected": true,
+      "name": "Avital",
+      "time": "10:19",
+      "datetime": "01.09.2022 10:19",
+      "isSelf": true,
+      "text": "И Human Interface Guidelines и Material Design рекомендуют...",
+      "cnt": "77"
+    },
+    {
+      "selected": false,
+      "name": "Mike",
+      "time": "10:20",
+      "datetime": "01.09.2022 10:20",
+      "isSelf": false,
+      "text": "Ok",
+      "cnt": "1"
+    }
+  ],
+  "msgs": [
+    {
+      "self": false,
+      "text": "Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой. Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.",
+      "status": "sended",
+      "time": "10:20",
+      "datetime": "01.09.2022 10:20"
+    },
+    {
+      "self": true,
+      "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "status": "sended",
+      "time": "10:20",
+      "datetime": "01.09.2022 10:20"
+    },
+    {
+      "self": true,
+      "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "status": "delivered",
+      "time": "10:20",
+      "datetime": "01.09.2022 10:20"
+    },
+    {
+      "self": true,
+      "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      "status": "readed",
+      "time": "10:20",
+      "datetime": "01.09.2022 10:20"
+    }
+  ]
+}

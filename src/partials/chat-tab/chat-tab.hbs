@@ -1,0 +1,19 @@
+<li class="chats-list__item chat-tab{{#if this.selected}} chat-tab--selected{{/if}}">
+  <img
+    src="https://via.placeholder.com/47"
+    class="chat-tab__avatar"
+  />
+  <section class="chat-tab__header">
+    <p class="chat-tab__name"><b>{{this.name}}</b></p>
+    <time datetime="{{this.datetime}}" class="chat-tab__time">{{this.time}}</time>
+  </section>
+  <section class="chat-tab__body">
+    <p class="chat-tab__text">
+      {{#if this.self}}
+      <span class="chat-tab__last-sender">Вы:</span>
+      {{/if}}
+      {{this.text}}
+    </p>
+    <p class="chat-tab__unread-cnt">{{this.cnt}}</p>
+  </section>
+</li>

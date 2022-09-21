@@ -1,0 +1,48 @@
+{
+  "pages": [
+    {
+      "url": "/src/layouts/enter/signin.hbs",
+      "title": "Sign In"
+    },
+    {
+      "url": "/src/layouts/enter/signup.hbs",
+      "title": "Sign Up"
+    },
+    {
+      "url": "/src/layouts/error/404.hbs",
+      "title": "404"
+    },
+    {
+      "url": "/src/layouts/error/500.hbs",
+      "title": "500"
+    },
+    {
+      "url": "/src/layouts/chat/empty-chat.hbs",
+      "title": "Empty chat"
+    },
+    {
+      "url": "/src/layouts/chat/chat.hbs",
+      "title": "Chat"
+    },
+    {
+      "url": "/src/layouts/chat/chat-modal.hbs",
+      "title": "Chat modal"
+    },
+    {
+      "url": "/src/layouts/chat/chat-att.hbs",
+      "title": "Chat attachment"
+    },
+    {
+      "url": "/src/layouts/profile/profile.hbs",
+      "title": "Profile"
+    },
+    {
+      "url": "/src/layouts/profile/profile-edit.hbs",
+      "title": "Profile edit fields"
+    },
+    {
+      "url": "/src/layouts/profile/profile-password.hbs",
+      "title": "Profile set password"
+    }
+  ]
+}

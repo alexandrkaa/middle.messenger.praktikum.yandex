@@ -1,0 +1,53 @@
+{
+  "fields": [
+    {
+      "name": "email",
+      "placeholderText": "e-mail",
+      "type": "email",
+      "errorText": "Required",
+      "hasError": false
+    },
+    {
+      "name": "login",
+      "placeholderText": "Login",
+      "type": "text",
+      "errorText": "Incorrect login",
+      "hasError": false
+    },
+    {
+      "name": "firstname",
+      "placeholderText": "Name",
+      "type": "text",
+      "errorText": "",
+      "hasError": false
+    },
+    {
+      "name": "lastname",
+      "placeholderText": "Lastname",
+      "type": "text",
+      "errorText": "",
+      "hasError": false
+    },
+    {
+      "name": "phone",
+      "placeholderText": "Phone",
+      "type": "tel",
+      "errorText": "",
+      "hasError": false
+    },
+    {
+      "name": "password",
+      "placeholderText": "Password",
+      "type": "password",
+      "errorText": "",
+      "hasError": true
+    },
+    {
+      "name": "password2",
+      "placeholderText": "Re-enter password",
+      "type": "password",
+      "errorText": "Passwords mismatch",
+      "hasError": true
+    }
+  ]
+}

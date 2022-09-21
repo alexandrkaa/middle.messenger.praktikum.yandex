@@ -1,0 +1,14 @@
+.link {
+  color: $blue;
+  font-size: 13px;
+  line-height: 13px;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &--red {
+    color: #ff0000;
+  }
+}

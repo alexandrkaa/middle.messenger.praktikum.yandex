@@ -1,0 +1,62 @@
+.field-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 52px;
+  position: relative;
+  padding: 5px 0;
+
+  &:nth-last-child(2) {
+    margin-bottom: 20px;
+  }
+}
+
+.field-block__text-input {
+  height: 14px;
+  font-size: 13px;
+  line-height: 14px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  margin-top: 20px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid $blue;
+  box-shadow: none;
+  color: $black;
+
+  &::placeholder {
+    color: $grey;
+  }
+
+  .field-block--has-error &[type="password"] {
+    color: $red;
+  }
+}
+
+.field-block__error {
+  color: $red;
+  font-size: 8px;
+  line-height: 8px;
+  display: none;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  .field-block--has-error & {
+    display: block;
+  }
+}
+
+.field-block__placeholder {
+  font-size: 9px;
+  line-height: 9px;
+  color: $grey;
+  display: none;
+  position: absolute;
+  top: 8px;
+  left: 0;
+
+  .field-block__text-input:focus + & {
+    display: block;
+  }
+}

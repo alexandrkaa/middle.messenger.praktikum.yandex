@@ -1,0 +1,32 @@
+{
+  "name": "middle.messenger.praktikum.yandex",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "parcel ./src/index.hbs --open --no-cache",
+    "build": "npm run clean && parcel build ./src/index.hbs",
+    "server": "node ./server/app.js",
+    "clean": "rimraf dist",
+    "start": "npm run build && npm run server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexandrkaa/middle.messenger.praktikum.yandex.git"
+  },
+  "author": "Aleksandr Komarov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexandrkaa/middle.messenger.praktikum.yandex/issues"
+  },
+  "homepage": "https://github.com/alexandrkaa/middle.messenger.praktikum.yandex#readme",
+  "devDependencies": {
+    "@anikin/parcel-transformer-handlebars": "1.0.9",
+    "@parcel/transformer-sass": "2.7.0",
+    "express": "4.18.1",
+    "parcel": "2.7.0",
+    "postcss": "8.4.16",
+    "postcss-scss": "4.0.5",
+    "rimraf": "^3.0.2"
+  }
+}

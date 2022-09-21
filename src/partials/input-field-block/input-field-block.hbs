@@ -1,0 +1,10 @@
+<div class="enter-form__field-block field-block {{#if this.hasError}}field-block--has-error{{/if}}">
+  <input
+    type="{{this.type}}"
+    class="field-block__text-input"
+    placeholder="{{this.placeholderText}}"
+    name="{{this.name}}"
+  />
+  <span class="field-block__placeholder">{{this.placeholderText}}</span>
+  <span class="field-block__error">{{this.errorText}}</span>
+</div>
