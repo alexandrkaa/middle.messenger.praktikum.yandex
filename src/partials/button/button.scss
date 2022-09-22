@@ -1,7 +1,7 @@
 .button {
   width: 100%;
-  color: #ffffff;
-  background-color: #3369f3;
+  color: $white;
+  background-color: $blue;
   border-radius: 8px;
   font-size: 13px;
   line-height: 37px;
@@ -13,7 +13,7 @@
   cursor: pointer;
 
   &--white {
-    color: #3369f3;
-    background-color: #ffffff;
+    color: $blue;
+    background-color: $white;
   }
 }
