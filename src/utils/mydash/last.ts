@@ -1,5 +1,5 @@
-export const last = (list) => {
-  let len;
+export const last = (list: unknown): unknown | undefined => {
+  let len: number;
   if (Array.isArray(list)) {
     len = list.length;
     if (len > 0) {

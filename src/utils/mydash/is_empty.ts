@@ -1,4 +1,4 @@
-export const isEmpty = (value) => {
+export const isEmpty = (value: unknown): boolean => {
   if (value === null) {
     return true;
   }
@@ -28,13 +28,15 @@ export const isEmpty = (value) => {
       }
     }
 
-    if (value.toString() === `[object Set]`) {
+    // if (value.toString() === `[object Set]`) {
+    if (value instanceof Set) {
       if (value.size === 0) {
         return true;
       }
     }
 
-    if (value.toString() === `[object Map]`) {
+    // if (value.toString() === `[object Map]`) {
+    if (value instanceof Map) {
       if (value.size === 0) {
         return true;
       }

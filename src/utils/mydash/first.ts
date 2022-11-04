@@ -1,4 +1,4 @@
-export const first = (list) => {
+export const first = (list: unknown): unknown | undefined => {
   if (Array.isArray(list)) {
     return list[0];
   }

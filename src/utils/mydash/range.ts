@@ -1,9 +1,14 @@
-export function range(start, end, step, fromRight) {
+export function range(
+  start: number,
+  end?: number,
+  step?: number,
+  fromRight: boolean = false
+) {
   // TODO: добавить проверку на типы
   let _start = toFinite(start),
     _stop = end,
     _step = step;
-  const result = [];
+  const result: number[] = [];
 
   if (_stop === undefined) {
     _stop = _start;
@@ -23,7 +28,10 @@ export function range(start, end, step, fromRight) {
   }
 
   let index = -1;
-  let length = Math.max(Math.ceil((_stop - _start) / (_step || 1)), 0);
+  let length = Math.max(
+    Math.ceil(((_stop as number) - _start) / (_step || 1)),
+    0
+  );
 
   while (length--) {
     result[fromRight ? length : ++index] = _start;
@@ -32,7 +40,7 @@ export function range(start, end, step, fromRight) {
   return result;
 }
 
-function toFinite(value) {
+function toFinite(value: number): number {
   if (!value) {
     return value === 0 ? value : 0;
   }
