@@ -15,15 +15,15 @@ html {
 }
 
 @import "./common.scss";
-@import "./partials/button/button.scss";
-@import "./partials/link/link.scss";
-@import "./layouts/enter/enter.scss";
-@import "./partials/input-field-block/input-field-block.scss";
-@import "./layouts/error/error.scss";
-@import "./layouts/chat/chat.scss";
-@import "./partials/chat-tab/chat-tab.scss";
-@import "./partials/chat-message/chat-message.scss";
-@import "./partials/modal/modal.scss";
-@import "./layouts/profile/profile.scss";
-@import "./partials/profile-form/profile-form.scss";
-@import "./partials/profile-block/profile-block.scss";
+@import "./components/button/button.scss";
+@import "./components/link/link.scss";
+@import "./pages/enter/enter.scss";
+@import "./components/input-field-block/input-field-block.scss";
+@import "./pages/error/error.scss";
+@import "./pages/chat/chat.scss";
+@import "./components/chat-tab/chat-tab.scss";
+@import "./components/chat-message/chat-message.scss";
+@import "./components/modal/modal.scss";
+@import "./pages/profile/profile.scss";
+@import "./components/profile-form/profile-form.scss";
+@import "./components/profile-block/profile-block.scss";

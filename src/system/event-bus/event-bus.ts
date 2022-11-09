@@ -1,6 +1,6 @@
 type Handler = (...args: unknown[]) => void;
 
-class EventBus {
+export class EventBus {
   private readonly listeners: Record<string, Handler[]> = {};
 
   on(event: string, callback: Handler): void {
@@ -17,7 +17,7 @@ class EventBus {
     );
   }
 
-  emit<T>(event: string, ...args: unknown[]) {
+  emit(event: string, ...args: unknown[]) {
     if (!this.listeners[event]) {
       throw new Event(`Нет события: ${event}`);
     }
