@@ -5,7 +5,7 @@
   "scripts": {
     "tmp": "parcel ./src/tmp.html",
     "dev": "parcel ./src/index.html --open --no-cache",
-    "build": "npm run clean && parcel build ./src/index.hbs",
+    "build": "npm run clean && parcel build ./src/index.html",
     "server": "node ./server/app.js",
     "clean": "rimraf dist",
     "start": "npm run build && npm run server",
