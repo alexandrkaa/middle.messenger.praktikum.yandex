@@ -84,6 +84,7 @@ const submitHandler = (evt: SubmitEvent) => {
       if (form) {
         const input = form.querySelector(`input`);
         if (input) {
+          console.log(input.value);
           input.value = ``;
         }
       }
