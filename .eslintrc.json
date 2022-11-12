@@ -1,0 +1,11 @@
+{
+  "extends": "airbnb", // Здесь вы указываете, что наследуетесь от набора правил
+  "rules": {
+    "no-unused-vars": 2,
+    "max-len": [1, 100],
+    "quotes": [2, "backtick", { "avoidEscape": true }],
+    "no-plusplus": "off",
+    "no-underscore-dangle": "off",
+    "no-self-compare": "off"
+  }
+}

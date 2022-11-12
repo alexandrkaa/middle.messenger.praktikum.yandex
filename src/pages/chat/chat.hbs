@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {{> meta}}
+    <title>Chat</title>
+  </head>
+  <body>
+    <main class="chat-page">
+      <article class="chat">
+        <h1 class="visually-hidden">Chat messenger App</h1>
+        <section class="chat__chats-list-block">
+          {{!-- <a href="#" class="profile-link">Профиль ></a> --}}
+          {{> link/link class="profile-link" href="../profile/profile.hbs" title="Profile >"}}
+          <form class="chat__filter-form filter-form">
+            <input type="text" name="filter" class="filter-form__filter" />
+          </form>
+          <ul class="chat__chats-list chats-list">
+            {{#each chat.tabs}}
+            {{> chat-tab/chat-tab}}
+            {{/each}}
+          </ul>
+        </section>
+        <section class="chat__chat-text-block chat-text-block">
+          <section class="chat-text-block__header">
+            <img
+              src="https://via.placeholder.com/32"
+              class="chat-text-block__avatar"
+              alt="User avatar"
+            />
+            <p class="chat-text-block__name"><b>Вадим</b></p>
+            <button
+              aria-label="Delete chat"
+              class="chat-text-block__delete-chat"
+            >
+              <span class="visually-hidden">Delete chat</span>
+            </button>
+            <button class="chat-text-block__control-users">
+              <span class="visually-hidden">Add / Remove user</span>
+            </button>
+          </section>
+          <section class="chat-text-block__body">
+            <ul class="chat-text-block__chat-messages chat-messages">
+              {{#each chat.msgs}}
+              {{> chat-message/chat-message}}
+              {{/each}}
+            </ul>
+          </section>
+          <form class="chat-text-block__form message-form">
+            <button class="message-form__attachment" type="button">
+              <span class="visually-hidden">Add attachment</span>
+            </button>
+            <input
+              type="text"
+              class="message-form__input"
+              placeholder="Message"
+              name="message"
+            />
+            <button class="message-form__send" type="submit">
+              <span class="visually-hidden">Send</span>
+            </button>
+          </form>
+        </section>
+      </article>
+    </main>
+  </body>
+</html>

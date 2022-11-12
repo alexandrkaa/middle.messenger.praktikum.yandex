@@ -1,0 +1,12 @@
+.profile-block {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid $lightGray;
+  font-size: 13px;
+  padding: 5px 0;
+  margin-bottom: 10px;
+
+  &--link {
+    align-self: flex-start;
+  }
+}

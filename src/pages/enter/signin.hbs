@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {{> meta}}
+    <title>Sign In</title>
+  </head>
+  <body>
+    <main class="enter-page">
+      <article class="enter">
+        <h1 class="enter__header">Sign In</h1>
+        <form class="enter__form enter-form">
+          {{#each signin.fields}}
+            {{> input-field-block/input-field-block}}
+          {{/each}}
+          <div class="enter-form__buttons-block">
+            {{> button/button class="enter-form__submit" type="submit" title="Sign In"}}
+            {{> link/link class="enter-form__link" href="./signup.hbs" title="Create account"}}
+          </div>
+        </form>
+      </article>
+    </main>
+  </body>
+</html>
