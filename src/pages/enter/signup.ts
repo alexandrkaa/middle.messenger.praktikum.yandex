@@ -1,4 +1,4 @@
-// import { Block, TAll, TChild } from "../../system/block/block";
+import { TOneChild } from "../../system/block/block";
 import { PageEnter, TPageEnterProps } from "./enter";
 import {
   EnterForm,
@@ -17,8 +17,8 @@ import {
 
 const validateFieldCreator = (
   validator: (evt: string) => boolean,
-  field,
-  props
+  field: TOneChild,
+  props: TIFBProps
 ) => {
   return (evt: FocusEvent): void => {
     const value = (evt.target as HTMLInputElement).value;

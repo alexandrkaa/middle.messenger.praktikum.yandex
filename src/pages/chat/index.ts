@@ -74,15 +74,22 @@ const chatMsg3 = new ChatMessage({
 
 const chatMsgs = [chatMsg1, chatMsg2, chatMsg3];
 
-const submitHandler = (evt) => {
+const submitHandler = (evt: SubmitEvent) => {
   evt.preventDefault();
-  const formData = new FormData(evt.target);
+  const formData = new FormData(evt.target as HTMLFormElement);
   const data = Object.fromEntries(formData.entries());
-  if (validateNotEmpty(data.message as string)) {
-    console.log(data);
-    evt.target.querySelector(`input`).value = ``;
-  } else {
-    console.error(`Empty message not allowed!`);
+  if (evt && evt.target) {
+    if (validateNotEmpty(data.message as string)) {
+      const form = evt?.target as HTMLFormElement;
+      if (form) {
+        const input = form.querySelector(`input`);
+        if (input) {
+          input.value = ``;
+        }
+      }
+    } else {
+      console.error(`Empty message not allowed!`);
+    }
   }
 };
 

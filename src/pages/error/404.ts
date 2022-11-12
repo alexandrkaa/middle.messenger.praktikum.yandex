@@ -1,14 +1,14 @@
 import { Error } from "../../components/error/error";
-import { Block, TAll, TChildren } from "../../system/block/block";
+import { Block, TAll, TChild } from "../../system/block/block";
 import { render } from "../../utils/render";
 import { tpl } from "./error-page.tpl";
 
 interface T404Props extends TAll {
-  page404: TChildren;
+  page404: TChild;
 }
 
 export class Page404 extends Block<T404Props> {
-  constructor(props) {
+  constructor(props: T404Props) {
     super(`article`, props);
     console.log(props);
   }
@@ -23,7 +23,7 @@ const error = new Error({
 });
 
 const page = new Page404({
-  error,
+  page404: error,
 });
 
 render(`.app`, page);

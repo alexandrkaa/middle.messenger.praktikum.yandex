@@ -10,20 +10,27 @@ type TMeta = {
 };
 
 type TList = {
-  [key: string]: unknown;
+  [key: string | symbol]: unknown;
 };
 
-type TEvents = Record<string, ((evt: Event) => void)[]>;
+type TAttrs = {
+  [key: string]: string;
+};
 
-export type TChild = InstanceType<typeof Block> | InstanceType<typeof Block>[];
+type TEvent = (evt: Event) => void;
+type TEvents = Record<string, TEvent[]>;
+
+export type TOneChild = InstanceType<typeof Block>;
+export type TChild = TOneChild | TOneChild[];
 export type TChildren = { [key: string]: TChild };
 
 export type TAll = {
+  [key: string | symbol]: unknown;
+} & {
   settings?: TList;
   events?: TEvents;
-  attrs?: {
-    [key: string]: string;
-  };
+  attrs?: TAttrs;
+  __id?: string | null;
 };
 
 export abstract class Block<TProps extends TAll> {
@@ -37,7 +44,7 @@ export abstract class Block<TProps extends TAll> {
   protected _element: HTMLElement;
   protected _meta: TMeta;
   protected props: TList;
-  protected attrs: TList;
+  protected attrs: TAttrs;
   private children: TChildren;
   private eventBus: EventBus;
   private _events: TEvents;
@@ -64,7 +71,7 @@ export abstract class Block<TProps extends TAll> {
     };
 
     this.children = children;
-    this.props = this._makePropsProxy({ ...props, __id: this._id });
+    this.props = this._makePropsProxy({ ...props, __id: this._id } as TProps);
 
     this.eventBus = new EventBus();
 
@@ -72,14 +79,14 @@ export abstract class Block<TProps extends TAll> {
     this.eventBus.emit(Block.EVENTS.INIT);
   }
 
-  private _registerEvents(eventBus) {
+  private _registerEvents(eventBus: EventBus) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
-  private _setAttrs(attrs) {
+  private _setAttrs(attrs: TAttrs) {
     const keys = Object.keys(attrs);
     if (keys.length > 0) {
       keys.forEach((key) => {
@@ -105,7 +112,7 @@ export abstract class Block<TProps extends TAll> {
   }
 
   // Может переопределять пользователь, необязательно трогать
-  componentDidUpdate(oldProps, newProps) {
+  componentDidUpdate(oldProps: TProps, newProps: TProps) {
     const result = !equal(oldProps, newProps);
     return result;
   }
@@ -117,7 +124,7 @@ export abstract class Block<TProps extends TAll> {
     this.eventBus.emit(Block.EVENTS.FLOW_CDM);
   }
 
-  private _componentDidUpdate(oldProps, newProps) {
+  private _componentDidUpdate(oldProps: TProps, newProps: TProps) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) return;
     this.attrs = (this.props.attrs as { [key: string]: string }) || {};
@@ -125,7 +132,7 @@ export abstract class Block<TProps extends TAll> {
     this.eventBus.emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  setProps = (nextProps) => {
+  setProps = (nextProps: TProps) => {
     if (!nextProps) {
       return;
     }
@@ -151,10 +158,10 @@ export abstract class Block<TProps extends TAll> {
     return this._element;
   }
 
-  private _makePropsProxy(props) {
+  private _makePropsProxy(props: TAll) {
     return new Proxy(props, {
       get: (target, prop) => {
-        const value = target[prop];
+        const value = target[prop as string];
         return typeof value === "function" ? value.bind(this) : value;
       },
       set: (target, prop, value) => {
@@ -177,7 +184,7 @@ export abstract class Block<TProps extends TAll> {
     }
   }
 
-  private _createDocumentElement(tagName) {
+  private _createDocumentElement(tagName: string) {
     // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     const element = document.createElement(tagName);
     // this._setId(element);
@@ -185,12 +192,12 @@ export abstract class Block<TProps extends TAll> {
   }
 
   private _addEvents() {
-    const { events = {} } = this.props;
-    if (events instanceof Object) {
-      const keys = Object.keys(events);
+    const events: TEvents = this.props.events as TEvents;
+    if (events !== undefined) {
+      const keys = Object.keys(events as TEvents);
       if (keys.length > 0) {
         keys.forEach((eventName) => {
-          events[eventName].forEach((handler) => {
+          events[eventName].forEach((handler: TEvent) => {
             this._element.addEventListener(eventName, handler);
           });
         });
@@ -213,7 +220,10 @@ export abstract class Block<TProps extends TAll> {
     }
   }
 
-  private _getChildren(propsAndChildren) {
+  private _getChildren(propsAndChildren: TProps): {
+    props: TList;
+    children: TChildren;
+  } {
     const children: TChildren = {};
     const props: {
       [key: string]: unknown;
@@ -232,8 +242,8 @@ export abstract class Block<TProps extends TAll> {
     return { children, props };
   }
 
-  protected compile(template, props): DocumentFragment {
-    const propsAndStubs = { ...props };
+  protected compile(template: string, props: TList): DocumentFragment {
+    const propsAndStubs = { ...(props as TAll) };
 
     Object.entries(this.children).forEach(([key, block]) => {
       // console.log(key);
@@ -247,7 +257,9 @@ export abstract class Block<TProps extends TAll> {
       }
     });
 
-    const fragment = this._createDocumentElement("template");
+    const fragment = this._createDocumentElement(
+      "template"
+    ) as HTMLTemplateElement;
 
     const tpl = Handlebars.compile(template);
     // const tpl = new Handlebars.SafeString(template);
