@@ -109,6 +109,10 @@ export abstract class Block<TProps extends TAll> {
 
   private _componentDidMount() {
     this.componentDidMount();
+
+    Object.values(this.children).forEach((child) => {
+      (child as TOneChild).dispatchComponentDidMount();
+    });
   }
 
   // Может переопределять пользователь, необязательно трогать
