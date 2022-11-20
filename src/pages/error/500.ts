@@ -1,6 +1,6 @@
 import { Error } from "../../components/error/error";
 import { Block, TAll, TChild } from "../../system/block/block";
-import { render } from "../../utils/render";
+// import { render } from "../../utils/render";
 import { tpl } from "./error-page.tpl";
 
 interface T500Props extends TAll {
@@ -26,4 +26,6 @@ const page = new Page500({
   error,
 });
 
-render(`.app`, page);
+export default page;
+
+// render(`.app`, page);

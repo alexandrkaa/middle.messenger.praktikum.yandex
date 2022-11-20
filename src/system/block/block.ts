@@ -9,7 +9,7 @@ type TMeta = {
   props: unknown;
 };
 
-type TList = {
+export type TList = {
   [key: string | symbol]: unknown;
 };
 
@@ -276,18 +276,18 @@ export abstract class Block<TProps extends TAll> {
       if (Array.isArray(block)) {
         block.forEach((it) => {
           const stub = fragment.content.querySelector(
-            `[data-id="${(it as InstanceType<typeof Block>)._id}"]`
+            `[data-id="${(it as TOneChild)._id}"]`
           );
           if (stub) {
-            stub.replaceWith((it as InstanceType<typeof Block>).getContent());
+            stub.replaceWith((it as TOneChild).getContent());
           }
         });
       } else {
         const stub = fragment.content.querySelector(
-          `[data-id="${(block as InstanceType<typeof Block>)._id}"]`
+          `[data-id="${(block as TOneChild)._id}"]`
         );
         if (stub) {
-          stub.replaceWith((block as InstanceType<typeof Block>).getContent());
+          stub.replaceWith((block as TOneChild).getContent());
         }
       }
     });

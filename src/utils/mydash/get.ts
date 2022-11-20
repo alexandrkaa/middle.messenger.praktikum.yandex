@@ -22,7 +22,7 @@ export const get = (
 ): Primitive | undefined => {
   const pathArr: string[] = path.split(`.`);
   let result: SafeNestedMap | Primitive | undefined = obj[pathArr[0]];
-  if (isPrimitive(isPrimitive(result))) {
+  if (isPrimitive(result)) {
     return result as Primitive;
   } else {
     for (let i = 1; i < pathArr.length; i++) {

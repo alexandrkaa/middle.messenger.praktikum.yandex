@@ -1,6 +1,6 @@
 import { Error } from "../../components/error/error";
 import { Block, TAll, TChild } from "../../system/block/block";
-import { render } from "../../utils/render";
+// import { render } from "../../utils/render";
 import { tpl } from "./error-page.tpl";
 
 interface T404Props extends TAll {
@@ -22,8 +22,10 @@ const error = new Error({
   errorText: `Not found`,
 });
 
-const page = new Page404({
-  page404: error,
-});
+// const page = new Page404({
+//   page404: error,
+// });
 
-render(`.app`, page);
+export default error;
+
+// render(`.app`, page);
