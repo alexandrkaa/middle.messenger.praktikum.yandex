@@ -1,10 +1,12 @@
 import { Route, IBlock } from "./route";
+import Page404 from "../../pages/error/404";
 
 export class Router {
   public routes: Route[];
   public history: typeof window.history;
   private _rootQuery: string;
   private _currentRoute: null | Route;
+  private _defaultPage: Route;
   static __instance: Router;
   constructor(rootQuery: string) {
     if (Router.__instance) {
@@ -15,7 +17,9 @@ export class Router {
     this.history = window.history;
     this._currentRoute = null;
     this._rootQuery = rootQuery;
-
+    this._defaultPage = new Route(`/404`, Page404 as unknown as IBlock, {
+      rootQuery: this._rootQuery,
+    });
     Router.__instance = this;
   }
 
@@ -35,9 +39,11 @@ export class Router {
   }
 
   _onRoute(pathname: string) {
-    const route = this.getRoute(pathname);
+    let route = this.getRoute(pathname);
+
     if (!route) {
-      return;
+      route = this._defaultPage;
+      // return;
     }
 
     if (this._currentRoute) {

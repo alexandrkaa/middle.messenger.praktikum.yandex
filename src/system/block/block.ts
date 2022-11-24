@@ -1,8 +1,7 @@
 import { v4 as makeUUID } from "uuid";
 import { EventBus } from "../event-bus/event-bus";
 import Handlebars from "handlebars";
-import equal from "fast-deep-equal";
-// import cloneDeep from "clone-deep";
+import { isEqual } from "../../utils/mydash";
 
 type TMeta = {
   tagName: string;
@@ -117,7 +116,7 @@ export abstract class Block<TProps extends TAll> {
 
   // Может переопределять пользователь, необязательно трогать
   componentDidUpdate(oldProps: TProps, newProps: TProps) {
-    const result = !equal(oldProps, newProps);
+    const result = !isEqual(oldProps, newProps);
     return result;
   }
 
@@ -153,6 +152,7 @@ export abstract class Block<TProps extends TAll> {
     const block = this.render();
     this._element.innerHTML = ""; // удаляем предыдущее содержимое
     this._element.appendChild(block);
+    // console.log(this._element.innerHTML);
     this._addEvents();
   }
 

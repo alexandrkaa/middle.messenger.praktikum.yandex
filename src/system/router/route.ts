@@ -2,16 +2,9 @@ import { TList, Block, TAll } from "../block/block";
 import { isPlainObject } from "../../utils/mydash/is_equal";
 import { render } from "../../utils/render";
 
-// export type ChildClass = { new (): Block<TAll> };
-// export interface ChildClass {
-//   new (): Block<TAll>;
-// }
-// export type ChildClass<T> = { new (): T };
-// type TBlock = null | InstanceType<typeof Block<TAll>>;
-type TBlock = null | IBlock;
 export interface IBlock extends Block<TAll> {
   render(): DocumentFragment;
-  new (): TBlock;
+  new (): Block<TAll>;
 }
 
 export class Route {
@@ -35,7 +28,7 @@ export class Route {
 
   leave() {
     if (this._block) {
-      (this._block as unknown as Block<TAll>).hide();
+      this._block.hide();
     }
   }
 
@@ -47,7 +40,7 @@ export class Route {
     if (!this._block) {
       this._block = new this._blockClass();
       if (isPlainObject(this._props) && this._props.rootQuery) {
-        render(this._props.rootQuery, this._block as unknown as Block<TAll>);
+        render(this._props.rootQuery, this._block);
       }
       return;
     }
