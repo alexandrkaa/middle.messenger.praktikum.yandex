@@ -1,5 +1,5 @@
 type Primitive = string | number | boolean;
-interface SafeNestedMap
+export interface SafeNestedMap
   extends Record<string | number | symbol, Primitive | SafeNestedMap> {}
 
 const isPrimitive = (val: unknown): boolean => {

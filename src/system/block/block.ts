@@ -3,7 +3,7 @@ import { EventBus } from "../event-bus/event-bus";
 import Handlebars from "handlebars";
 import { isEqual } from "../../utils/mydash";
 
-type TMeta = {
+export type TMeta = {
   tagName: string;
   props: unknown;
 };
@@ -12,12 +12,12 @@ export type TList = {
   [key: string | symbol]: unknown;
 };
 
-type TAttrs = {
+export type TAttrs = {
   [key: string]: string;
 };
 
-type TEvent = (evt: Event) => void;
-type TEvents = Record<string, TEvent[]>;
+export type TEvent = (evt: Event) => void;
+export type TEvents = Record<string, TEvent[]>;
 
 export type TOneChild = InstanceType<typeof Block>;
 export type TChild = TOneChild | TOneChild[];
@@ -54,6 +54,8 @@ export abstract class Block<TProps extends TAll> {
     // console.log(tagName);
     this.children = children;
     this._id = makeUUID();
+
+    this._events = {};
 
     if (
       props.hasOwnProperty(`settings`) &&
@@ -143,6 +145,18 @@ export abstract class Block<TProps extends TAll> {
     Object.assign(this.props, nextProps);
   };
 
+  getProps = (): TList => {
+    return this.props;
+  };
+
+  // public setChildren = (nextChildren: TChild):void => {
+  //   if (!nextChildren) {
+  //     return;
+  //   }
+
+  //   Object.assign(this.children, nextChildren);
+  // };
+
   get element() {
     return this._element;
   }
@@ -151,12 +165,12 @@ export abstract class Block<TProps extends TAll> {
     this._removeEvents();
     const block = this.render();
     this._element.innerHTML = ""; // удаляем предыдущее содержимое
-    this._element.appendChild(block);
+    this._element.appendChild(block as unknown as DocumentFragment);
     // console.log(this._element.innerHTML);
     this._addEvents();
   }
 
-  abstract render(): DocumentFragment;
+  render() {}
 
   public getContent() {
     return this._element;
@@ -202,10 +216,14 @@ export abstract class Block<TProps extends TAll> {
       if (keys.length > 0) {
         keys.forEach((eventName) => {
           events[eventName].forEach((handler: TEvent) => {
-            this._element.addEventListener(eventName, handler);
+            const _event = handler.bind(this);
+            if (!this._events[eventName]) {
+              this._events[eventName] = [];
+            }
+            this._events[eventName].push(_event);
+            this._element.addEventListener(eventName, _event);
           });
         });
-        this._events = events as TEvents;
       }
     }
   }

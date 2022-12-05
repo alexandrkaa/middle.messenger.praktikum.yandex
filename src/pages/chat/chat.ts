@@ -2,8 +2,9 @@ import { tpl } from "./chat.tpl";
 import { Block, TAll, TChild } from "../../system/block/block";
 
 export interface TPageChatProps extends TAll {
-  profileLink: TChild;
-  chatTabs: TChild;
+  // profileLink: TChild;
+  // chatTabs: TChild;
+  sideBar: TChild;
   avatarSrc: string;
   name: string;
   chatMsgs: TChild;
@@ -11,7 +12,7 @@ export interface TPageChatProps extends TAll {
   attrs: Record<string, string>;
 }
 
-export class PageChat extends Block<TPageChatProps> {
+export default class PageChat extends Block<TPageChatProps> {
   constructor(props: TPageChatProps) {
     super(`main`, props);
   }

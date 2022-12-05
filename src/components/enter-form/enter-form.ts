@@ -3,17 +3,25 @@ import { Block, TAll, TChild } from "../../system/block/block";
 
 export interface TEnterFormProps extends TAll {
   enterFields: TChild;
-  submitTitle: string;
-  linkTitle: string;
-  link: string;
+  submitButton: TChild;
+  link: TChild;
   attrs: {
     class: string;
   };
 }
 
-export class EnterForm extends Block<TEnterFormProps> {
+export default class EnterForm extends Block<TEnterFormProps> {
+  private _hasError: boolean;
   constructor(props: TEnterFormProps) {
     super(`form`, props);
+  }
+
+  get hasError() {
+    return this._hasError;
+  }
+
+  set hasError(val) {
+    this._hasError = Boolean(val);
   }
 
   render(): DocumentFragment {

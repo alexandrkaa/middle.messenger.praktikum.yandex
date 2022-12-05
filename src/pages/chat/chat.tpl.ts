@@ -1,15 +1,7 @@
 export const tpl: string = `
   <article class="chat">
     <h1 class="visually-hidden">Chat messenger App</h1>
-    <section class="chat__chats-list-block">
-      {{{profileLink}}}
-      <form class="chat__filter-form filter-form">
-        <input type="text" name="filter" class="filter-form__filter" />
-      </form>
-      <ul class="chat__chats-list chats-list">
-        {{{chatTabs}}}
-      </ul>
-    </section>
+    {{{sideBar}}}
     <section class="chat__chat-text-block chat-text-block">
       <section class="chat-text-block__header">
         <img

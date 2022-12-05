@@ -1,15 +1,12 @@
-import { BaseAPI } from "../system/base-api/base-api";
-import {
-  HTTPTransport,
-  TOptions,
-} from "../system/http-transport/http-transport";
-import { BASE_URL } from "../consts/consts";
-import { TSignUpBData } from "./adapters";
+import { BaseAPI } from "../../base-api/base-api";
+import { HTTPTransport, TOptions } from "../../http-transport/http-transport";
+import { BASE_URL } from "../../../consts/consts";
+import { TSignUpBData, TSignUpFData } from "../../../utils/adapters";
 
 const authAPIInstance = new HTTPTransport(BASE_URL);
 
 type TReg = TOptions & {
-  data: TSignUpBData;
+  data: TSignUpBData | TSignUpFData;
 };
 
 type TLogin = TOptions & {

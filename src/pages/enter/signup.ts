@@ -1,11 +1,9 @@
 import { TOneChild } from "../../system/block/block";
 import { PageEnter, TPageEnterProps } from "./enter";
-import {
-  EnterForm,
+import EnterForm, {
   TEnterFormProps,
 } from "../../components/enter-form/enter-form";
-import {
-  InputFieldBlock,
+import InputFieldBlock, {
   TIFBProps,
 } from "../../components/input-field-block/input-field-block";
 import { render } from "../../utils/render";
@@ -14,6 +12,8 @@ import {
   validatePassword,
   validateNotEmpty,
 } from "../../utils/validate";
+import { signInLink } from "../../components/link/models";
+import { signUpSubmit } from "../../components/button/models";
 
 const validateFieldCreator = (
   validator: (evt: string) => boolean,
@@ -220,9 +220,8 @@ const signInFields = [
 
 const enterFormProps: TEnterFormProps = {
   enterFields: signInFields,
-  submitTitle: `Sign In`,
-  linkTitle: `Sign Up`,
-  link: `./signin.html`,
+  submitButton: signUpSubmit,
+  link: signInLink,
   attrs: {
     class: `enter__form enter-form`,
   },

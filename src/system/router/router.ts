@@ -1,4 +1,5 @@
 import { Route, IBlock } from "./route";
+import { routesPaths } from "../../consts/routes";
 import Page404 from "../../pages/error/404";
 
 export class Router {
@@ -17,9 +18,13 @@ export class Router {
     this.history = window.history;
     this._currentRoute = null;
     this._rootQuery = rootQuery;
-    this._defaultPage = new Route(`/404`, Page404 as unknown as IBlock, {
-      rootQuery: this._rootQuery,
-    });
+    this._defaultPage = new Route(
+      routesPaths.NOT_FOUND,
+      Page404 as unknown as IBlock,
+      {
+        rootQuery: this._rootQuery,
+      }
+    );
     Router.__instance = this;
   }
 
