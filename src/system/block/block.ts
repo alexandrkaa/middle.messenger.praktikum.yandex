@@ -44,16 +44,18 @@ export abstract class Block<TProps extends TAll> {
   protected _meta: TMeta;
   protected props: TList;
   protected attrs: TAttrs;
-  private children: TChildren;
+  protected children: TChildren;
   private eventBus: EventBus;
   private _events: TEvents;
+  protected isMounted: boolean;
   private readonly _id: string | null;
 
-  constructor(tagName = "div", propsAndChildren: TProps) {
+  constructor(propsAndChildren: TProps, tagName = "div") {
     const { children, props } = this._getChildren(propsAndChildren);
     // console.log(tagName);
     this.children = children;
     this._id = makeUUID();
+    this.isMounted = false;
 
     this._events = {};
 
@@ -112,7 +114,11 @@ export abstract class Block<TProps extends TAll> {
     this.componentDidMount();
 
     Object.values(this.children).forEach((child) => {
-      (child as TOneChild).dispatchComponentDidMount();
+      if (Array.isArray(child)) {
+        child.forEach((it) => it.dispatchComponentDidMount());
+      } else {
+        child.dispatchComponentDidMount();
+      }
     });
   }
 
@@ -123,7 +129,9 @@ export abstract class Block<TProps extends TAll> {
   }
 
   // Может переопределять пользователь, необязательно трогать
-  componentDidMount() {}
+  // eslint-disable-next-line
+  protected componentDidMount(): void {}
+  // componentDidMount() {}
 
   private dispatchComponentDidMount() {
     this.eventBus.emit(Block.EVENTS.FLOW_CDM);
@@ -168,6 +176,11 @@ export abstract class Block<TProps extends TAll> {
     this._element.appendChild(block as unknown as DocumentFragment);
     // console.log(this._element.innerHTML);
     this._addEvents();
+
+    if (!this.isMounted) {
+      this.isMounted = true;
+      this.dispatchComponentDidMount();
+    }
   }
 
   render() {}
@@ -291,6 +304,7 @@ export abstract class Block<TProps extends TAll> {
     fragment.innerHTML = strHtml;
 
     Object.values(this.children).forEach((block) => {
+      // console.log(block, Array.isArray(block));
       if (Array.isArray(block)) {
         block.forEach((it) => {
           const stub = fragment.content.querySelector(
@@ -314,11 +328,17 @@ export abstract class Block<TProps extends TAll> {
     return fragment.content;
   }
 
+  unmount() {
+    this._removeEvents();
+    this._element.parentElement!.innerHTML = ``;
+  }
+
   show() {
     this._element.style.display = `block`;
   }
 
   hide() {
+    // console.log(this._element.parentElement);
     this._element.style.display = `none`;
   }
 }

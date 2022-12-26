@@ -8,8 +8,8 @@ export interface TPageSideBar extends TAll {
 }
 
 export default class SideBar extends Block<TPageSideBar> {
-  constructor(props: TPageSideBar) {
-    super(`main`, props);
+  constructor(props: TPageSideBar, tagName: string = `main`) {
+    super(props, tagName);
   }
 
   render(): DocumentFragment {

@@ -1,4 +1,4 @@
-import { profileLink } from "../link/models";
+import { profileLink } from "../link/link.models";
 import { ChatTab } from "../chat-tab/chat-tab";
 import SideBar from "./sidebar";
 

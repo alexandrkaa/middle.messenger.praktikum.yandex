@@ -1,5 +1,5 @@
 export const tpl: string = `
-<div class="profile-block">
+
   <p class="profile-form__title">{{title}}</p>
   <input
     type="{{type}}"
@@ -8,5 +8,4 @@ export const tpl: string = `
     name="{{formName}}"
     placeholder="{{title}}"
   />
-</div>
 `;

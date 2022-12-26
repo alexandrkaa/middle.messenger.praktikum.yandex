@@ -1,10 +1,15 @@
-export const routesPaths: Record<string, string> = {
+const routesPaths: Record<string, string> = {
   MAIN: `/`,
-  CHATS: `/chats`,
-  CHAT: `/chat`,
-  SING_UP: `/signup`,
-  SIGN_IN: `/signin`,
-  PROFILE: `/profile`,
+  CHATS: `/messenger`,
+  // CHAT: `/messenger`,
+  SIGN_UP: `/sign-up`,
+  SIGN_IN: `/sign-in`,
+  PROFILE: `/settings`,
   NOT_FOUND: `/404`,
   SERVER_ERROR: `/500`,
 };
+
+routesPaths.PROFILE_EDIT = `${routesPaths.PROFILE}/edit`;
+routesPaths.PROFILE_PASSWORD = `${routesPaths.PROFILE}/password`;
+
+export { routesPaths };

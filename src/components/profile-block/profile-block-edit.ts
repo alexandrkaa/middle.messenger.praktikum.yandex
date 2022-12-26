@@ -1,7 +1,7 @@
-import { tpl } from "./profile-block.tpl";
+import { tpl } from "./profile-block-edit.tpl";
 import { Block, TAll } from "../../system/block/block";
 
-export interface TProfileBlock extends TAll {
+export interface TProfileBlockEdit extends TAll {
   title: string;
   value: string;
   formName: string;
@@ -12,13 +12,17 @@ export interface TProfileBlock extends TAll {
   };
 }
 
-export default class ProfileBlock extends Block<TProfileBlock> {
-  constructor(props: TProfileBlock, tagName: string = `div`, _tpl?: string) {
+export default class ProfileBlockEdit extends Block<TProfileBlockEdit> {
+  constructor(
+    props: TProfileBlockEdit,
+    tagName: string = `div`,
+    _tpl?: string
+  ) {
     super(props, tagName);
   }
 
   protected componentDidMount(): void {
-    // console.log(`ProfileBlock: CDM`);
+    // console.log(`ProfileBlockEdit: CDM`);
   }
 
   render(): DocumentFragment {

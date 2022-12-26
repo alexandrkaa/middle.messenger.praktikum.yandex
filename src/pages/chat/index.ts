@@ -1,13 +1,13 @@
 // import { Block, TAll, TChild } from "../../system/block/block";
 import { TPageChatProps } from "./chat";
-import { render } from "../../utils/render";
-import PageChat from "./chat";
+// import { render } from "../../utils/render";
+// import PageChat from "./chat";
 // import Link from "../../components/link/link";
 // import { ChatTab } from "../../components/chat-tab/chat-tab";
 import { ChatMessage } from "../../components/chat-message/chat-message";
 import { ChatForm } from "../../components/chat-form/chat-form";
 import { validateNotEmpty } from "../../utils/validate";
-import { sideBar } from "../../components/sidebar/models";
+import { sideBar } from "../../components/sidebar/sidebar.models";
 
 const chatMsg1 = new ChatMessage({
   isSelf: true,
@@ -72,7 +72,7 @@ const chatForm = new ChatForm({
   },
 });
 
-const propsPageChat: TPageChatProps = {
+export const propsPageChat: TPageChatProps = {
   // profileLink: profileLink,
   // chatTabs: chatTabs,
   sideBar: sideBar,
@@ -84,8 +84,8 @@ const propsPageChat: TPageChatProps = {
     class: `chat-page`,
   },
 };
-const pageChat = new PageChat(propsPageChat);
-render(`.app`, pageChat);
+// const pageChat = new PageChat(propsPageChat);
+// render(`.app`, pageChat);
 
 // setTimeout(() => {
 //   chatMsg3.setProps({

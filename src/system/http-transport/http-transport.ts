@@ -4,7 +4,7 @@ import { METHODS, DEFAULT_TIMEOUT } from "../../consts/consts";
 export type TOptions = Record<string, unknown> & {
   headers?: Record<string, string>;
   method?: string;
-  data?: Record<string, unknown>;
+  data?: Record<string, unknown> | FormData;
   timeout?: number;
 };
 
@@ -58,19 +58,22 @@ export class HTTPTransport {
 
       xhr.open(method, isGet && !!data ? `${url}${queryStringify(data)}` : url);
 
+      xhr.withCredentials = true;
+      xhr.timeout = timeout;
+      xhr.onabort = reject;
+      xhr.onerror = reject;
+      xhr.ontimeout = reject;
+
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);
       });
 
       xhr.onload = function () {
+        if (xhr.status < 200 || xhr.status >= 400) {
+          reject(xhr);
+        }
         resolve(xhr);
       };
-
-      xhr.timeout = timeout;
-
-      xhr.onabort = reject;
-      xhr.onerror = reject;
-      xhr.ontimeout = reject;
 
       if (isFormData) {
         xhr.setRequestHeader("accept", "application/json");
@@ -82,6 +85,7 @@ export class HTTPTransport {
         xhr.send();
       } else {
         if (isFormData) {
+          console.log(`121`);
           xhr.send(data);
         } else {
           xhr.send(JSON.stringify(data));

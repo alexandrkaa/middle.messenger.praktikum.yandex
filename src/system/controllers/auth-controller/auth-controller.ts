@@ -3,6 +3,7 @@ import {
   TSignUpBData,
   TSignUpFData,
   signUpFBAdapter,
+  signUpBFAdapter,
 } from "../../../utils/adapters";
 import { TOptions } from "../../http-transport/http-transport";
 import { APP_MOUNT_POINT } from "../../../consts/consts";
@@ -51,7 +52,8 @@ class AuthController {
         console.log(res);
       })
       .then(() => {
-        router.go(routesPaths.CHATS);
+        console.log(`routing...`);
+        router.go(routesPaths.PROFILE);
       })
       .catch((e) => console.log(JSON.parse(e.responseText)));
   }
@@ -59,6 +61,9 @@ class AuthController {
   public async logout() {
     return authApi
       .logOut()
+      .then(() => {
+        return store.set("user", undefined);
+      })
       .then(() => {
         router.go(routesPaths.SIGN_IN);
       })
@@ -69,25 +74,26 @@ class AuthController {
     return authApi
       .user()
       .then((res: TResponse) => {
-        return store.set("user", JSON.parse(res.response));
+        return store.set("user", signUpBFAdapter(JSON.parse(res.response)));
       })
       .then((data) => {
-        return data;
+        return data as TSignUpBData;
       })
       .catch((e) => {
         console.log(e);
-        store.set("user", null);
+        store.set("user", undefined);
       });
   }
 
   public async getUser() {
-    const userInfo = store.getState().user;
+    const userData = store.getState().user;
 
-    if (!userInfo) {
+    if (!userData) {
       await this.user();
     }
     return store.getState().user;
   }
 }
 
-export { AuthController, TReg, TLogin };
+export default AuthController;
+export { TReg, TLogin };

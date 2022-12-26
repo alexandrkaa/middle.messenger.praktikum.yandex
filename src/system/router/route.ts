@@ -4,7 +4,7 @@ import { render } from "../../utils/render";
 
 export interface IBlock extends Block<TAll> {
   render(): DocumentFragment;
-  new (): Block<TAll>;
+  new (props: TAll | null | undefined): Block<TAll>;
 }
 
 export class Route {
@@ -12,11 +12,18 @@ export class Route {
   private _blockClass: IBlock;
   private _block: null | InstanceType<IBlock>;
   private _props: TList;
-  constructor(pathname: string, view: IBlock, props: TList) {
+  private _blockProps: TAll | null | undefined;
+  constructor(
+    pathname: string,
+    view: IBlock,
+    props: TList,
+    blockProps: TAll | null | undefined
+  ) {
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;
     this._props = props;
+    this._blockProps = blockProps || undefined;
   }
 
   navigate(pathname: string) {
@@ -28,7 +35,9 @@ export class Route {
 
   leave() {
     if (this._block) {
-      this._block.hide();
+      // this._block.hide();
+      this._block.unmount();
+      this._block = null;
     }
   }
 
@@ -38,7 +47,8 @@ export class Route {
 
   render() {
     if (!this._block) {
-      this._block = new this._blockClass();
+      // console.log(this._blockProps);
+      this._block = new this._blockClass(this._blockProps);
       if (isPlainObject(this._props) && this._props.rootQuery) {
         render(this._props.rootQuery, this._block);
       }

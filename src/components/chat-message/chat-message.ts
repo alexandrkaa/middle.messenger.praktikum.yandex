@@ -13,8 +13,8 @@ export interface TChatMsgProps extends TAll {
 }
 
 export class ChatMessage extends Block<TChatMsgProps> {
-  constructor(props: TChatMsgProps) {
-    super(`li`, props);
+  constructor(props: TChatMsgProps, tagName: string = `li`) {
+    super(props, tagName);
   }
 
   render(): DocumentFragment {

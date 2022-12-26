@@ -18,12 +18,15 @@ export class EventBus {
   }
 
   emit(event: string, ...args: unknown[]) {
-    if (!this.listeners[event]) {
-      throw new Error(`Нет события: ${event}`);
+    // if (!this.listeners[event]) {
+    //   throw new Error(`Нет события: ${event}`);
+    // }
+    if (this.listeners[event]) {
+      this.listeners[event].forEach((listener) => {
+        listener(...args);
+      });
+    } else {
+      console.error(`Нет события: ${event}`);
     }
-
-    this.listeners[event].forEach((listener) => {
-      listener(...args);
-    });
   }
 }

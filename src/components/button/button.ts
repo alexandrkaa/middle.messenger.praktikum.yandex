@@ -10,8 +10,8 @@ interface TButtonProps extends TAll {
 }
 
 export default class Button extends Block<TButtonProps> {
-  constructor(props: TButtonProps) {
-    super(`button`, props);
+  constructor(props: TButtonProps, tagName: string = `button`) {
+    super(props, tagName);
   }
 
   render(): DocumentFragment {

@@ -9,19 +9,25 @@ export const tpl: string = `
       <a href="/500">500</a>
     </li>
     <li class="menu-item">
-      <a href="/chats">Chats</a>
+      <a href="/sign-in">Sign In</a>
+    </li>
+    <li class="menu-item">
+      <a href="/sign-up">Sign Up</a>
+    </li>
+    <li class="menu-item">
+      <a href="/settings">Profile</a>
+    </li>
+    <li class="menu-item">
+      <a href="/settings/edit">Profile edit</a>
+    </li>
+    <li class="menu-item">
+      <a href="/settings/password">Profile password</a>
+    </li>
+    <li class="menu-item">
+      <a href="/messenger">Chats</a>
     </li>
     <!-- <li class="menu-item">
       <a href="./pages/chat/index.html">Chat</a>
-    </li>
-    <li class="menu-item">
-      <a href="./pages/enter/signin.html">Sign In</a>
-    </li>
-    <li class="menu-item">
-      <a href="./pages/enter/signup.html">Sign Up</a>
-    </li>
-    <li class="menu-item">
-      <a href="./pages/profile/index.html">Profile</a>
     </li> -->
   </ul>
 </nav>

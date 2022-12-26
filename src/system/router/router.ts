@@ -1,4 +1,5 @@
 import { Route, IBlock } from "./route";
+import { TAll } from "../block/block";
 import { routesPaths } from "../../consts/routes";
 import Page404 from "../../pages/error/404";
 
@@ -23,13 +24,22 @@ export class Router {
       Page404 as unknown as IBlock,
       {
         rootQuery: this._rootQuery,
-      }
+      },
+      null
     );
     Router.__instance = this;
   }
 
-  use(pathname: string, block: IBlock) {
-    const route = new Route(pathname, block, { rootQuery: this._rootQuery });
+  use(pathname: string, block: IBlock, blockProps: TAll | null | undefined) {
+    if (!pathname) {
+      throw new Error(`Pathname is mandatory`);
+    }
+    const route = new Route(
+      pathname,
+      block,
+      { rootQuery: this._rootQuery },
+      blockProps
+    );
     this.routes.push(route);
     return this;
   }
@@ -37,6 +47,7 @@ export class Router {
   start() {
     // Реагируем на изменения в адресной строке и вызываем перерисовку
     window.onpopstate = (event: PopStateEvent) => {
+      // console.log(event);
       this._onRoute((event.currentTarget as Window)?.location?.pathname);
     };
 

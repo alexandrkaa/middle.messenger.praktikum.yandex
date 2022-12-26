@@ -17,7 +17,19 @@ function isArrayOrObject(value: unknown): value is [] | Indexed {
 }
 
 function isEqual(lhs: Indexed, rhs: Indexed) {
-  if (lhs === null || rhs === null) {
+  if (lhs === null && rhs !== null) {
+    return false;
+  }
+
+  if (rhs === null && lhs !== null) {
+    return false;
+  }
+
+  if (lhs === undefined && rhs !== undefined) {
+    return false;
+  }
+
+  if (rhs === undefined && lhs !== undefined) {
     return false;
   }
 

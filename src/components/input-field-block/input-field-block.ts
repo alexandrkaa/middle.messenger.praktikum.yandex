@@ -14,8 +14,8 @@ export interface TIFBProps extends TAll {
 export default class InputFieldBlock extends Block<TIFBProps> {
   private _fieldValue: string;
   private _hasError: boolean;
-  constructor(props: TIFBProps) {
-    super(`div`, props);
+  constructor(props: TIFBProps, tagName: string | undefined = undefined) {
+    super(props, tagName);
     this._fieldValue = ``;
     this._hasError = false;
   }

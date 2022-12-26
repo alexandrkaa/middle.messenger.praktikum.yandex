@@ -9,6 +9,8 @@ export const METHODS: Record<string, string> = {
 };
 
 export const LOGIN_LENGTH: number = 6;
-export const PASSWORD_REGEX: RegExp = /^([a-zA-Z0-9]){6,}$/;
+export const PASSWORD_REGEX: RegExp = /^([a-zA-Z0-9_]){3,}$/;
+export const EMAIL_REGEX: RegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$/;
+export const PHONE_REGEX: RegExp = /^([0-9]+){10,}$/;
 
-export const BASE_URL = "https://ya-praktikum.tech/api/v2";
+export const API_BASE_URL = "https://ya-praktikum.tech/api/v2";

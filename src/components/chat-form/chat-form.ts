@@ -12,8 +12,8 @@ export interface TChatFormProps extends TAll {
 }
 
 export class ChatForm extends Block<TChatFormProps> {
-  constructor(props: TChatFormProps) {
-    super(`form`, props);
+  constructor(props: TChatFormProps, tagName: string = `form`) {
+    super(props, tagName);
   }
 
   render(): DocumentFragment {

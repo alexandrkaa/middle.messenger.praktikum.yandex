@@ -12,8 +12,8 @@ export interface TEnterFormProps extends TAll {
 
 export default class EnterForm extends Block<TEnterFormProps> {
   private _hasError: boolean;
-  constructor(props: TEnterFormProps) {
-    super(`form`, props);
+  constructor(props: TEnterFormProps, tagName: string = `form`) {
+    super(props, tagName);
   }
 
   get hasError() {

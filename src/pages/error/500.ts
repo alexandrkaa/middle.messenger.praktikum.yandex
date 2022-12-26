@@ -12,8 +12,8 @@ const error = new Error({
   errorText: `Server error`,
 });
 export class Page500 extends Block<T500Props> {
-  constructor(props: T500Props) {
-    super(`article`, { ...props, error });
+  constructor(props: T500Props, tagName: string = `article`) {
+    super({ ...props, error }, tagName);
     console.log(props);
   }
 

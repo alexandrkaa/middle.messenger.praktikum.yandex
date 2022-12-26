@@ -6,8 +6,11 @@ export type TSignUpFData = {
   secondName: string;
   login: string;
   email: string;
-  password: string;
+  password?: string;
   phone: string;
+  displayName: string;
+  id?: number;
+  avatar?: string | null | undefined;
 };
 
 export type TSignUpBData = {
@@ -15,8 +18,11 @@ export type TSignUpBData = {
   second_name: string;
   login: string;
   email: string;
-  password: string;
+  password?: string;
   phone: string;
+  display_name: string;
+  id?: number;
+  avatar?: string | null | undefined;
 };
 
 export const signUpFBAdapter = (data: TSignUpFData): TSignUpBData => {
@@ -27,6 +33,9 @@ export const signUpFBAdapter = (data: TSignUpFData): TSignUpBData => {
     email: data.email,
     password: data.password,
     phone: data.phone,
+    display_name: data.displayName,
+    id: data?.id,
+    avatar: data?.avatar,
   };
 };
 
@@ -38,5 +47,8 @@ export const signUpBFAdapter = (data: TSignUpBData): TSignUpFData => {
     email: data.email,
     password: data.password,
     phone: data.phone,
+    displayName: data.display_name,
+    id: data?.id,
+    avatar: data?.avatar,
   };
 };

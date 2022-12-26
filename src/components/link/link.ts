@@ -10,8 +10,8 @@ interface TLinkProps extends TAll {
 }
 
 export default class Link extends Block<TLinkProps> {
-  constructor(props: TLinkProps) {
-    super(`a`, props);
+  constructor(props: TLinkProps, tagName: string = `a`) {
+    super(props, tagName);
   }
 
   render(): DocumentFragment {

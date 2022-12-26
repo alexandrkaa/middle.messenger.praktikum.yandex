@@ -7,8 +7,8 @@ interface TErrorProps extends TAll {
 }
 
 export class Error extends Block<TErrorProps> {
-  constructor(props: TErrorProps) {
-    super(`section`, props);
+  constructor(props: TErrorProps, tagName: string = `section`) {
+    super(props, tagName);
   }
 
   render(): DocumentFragment {

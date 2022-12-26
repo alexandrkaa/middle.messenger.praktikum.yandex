@@ -1,9 +1,10 @@
 import { BaseAPI } from "../../base-api/base-api";
 import { HTTPTransport, TOptions } from "../../http-transport/http-transport";
-import { BASE_URL } from "../../../consts/consts";
+import { API_BASE_URL } from "../../../consts/consts";
 import { TSignUpBData, TSignUpFData } from "../../../utils/adapters";
 
-const authAPIInstance = new HTTPTransport(BASE_URL);
+const authAPIInstance = new HTTPTransport(API_BASE_URL);
+const AUTH_BASE_URL = `/auth`;
 
 type TReg = TOptions & {
   data: TSignUpBData | TSignUpFData;
@@ -18,19 +19,19 @@ type TLogin = TOptions & {
 
 class AuthAPI extends BaseAPI {
   public signUp(optionsAndData: TReg): Promise<unknown> {
-    return authAPIInstance.post("/auth/signup", optionsAndData);
+    return authAPIInstance.post(`${AUTH_BASE_URL}/signup`, optionsAndData);
   }
 
   public signIn(optionsAndData: TLogin): Promise<unknown> {
-    return authAPIInstance.post("/auth/signin", optionsAndData);
+    return authAPIInstance.post(`${AUTH_BASE_URL}/signin`, optionsAndData);
   }
 
   public user(): Promise<unknown> {
-    return authAPIInstance.get("/auth/user");
+    return authAPIInstance.get(`${AUTH_BASE_URL}/user`);
   }
 
   public logOut(): Promise<unknown> {
-    return authAPIInstance.post("/auth/logout");
+    return authAPIInstance.post(`${AUTH_BASE_URL}/logout`);
   }
 }
 
