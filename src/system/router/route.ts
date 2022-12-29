@@ -42,6 +42,7 @@ export class Route {
   }
 
   match(pathname: string) {
+    // TODO: сделать регулярку, чтобы можно было пути /messenger/203
     return pathname === this._pathname;
   }
 

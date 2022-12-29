@@ -1,4 +1,6 @@
 import { Indexed } from "./merge";
+// import { Block } from "../../system/block/block";
+
 export function isPlainObject(value: unknown): value is Indexed {
   return (
     typeof value === "object" &&
@@ -33,6 +35,10 @@ function isEqual(lhs: Indexed, rhs: Indexed) {
     return false;
   }
 
+  if (!isArrayOrObject(lhs)) {
+    return lhs === rhs;
+  }
+
   if (Object.keys(lhs).length !== Object.keys(rhs).length) {
     return false;
   }
@@ -40,11 +46,18 @@ function isEqual(lhs: Indexed, rhs: Indexed) {
   // eslint-disable-next-line no-restricted-syntax
   for (const [key, value] of Object.entries(lhs)) {
     const rightValue = rhs[key];
+    // if (value instanceof Block) {
+    //   console.log(value.id, rhs[key].id);
+    //   if (value.id !== rhs[key].id) {
+    //     return false;
+    //   }
+    // }
     if (isArrayOrObject(value) && isArrayOrObject(rightValue)) {
       if (isEqual(value, rightValue)) {
         // eslint-disable-next-line no-continue
         continue;
       }
+      // console.log(value, rightValue);
       return false;
     }
 

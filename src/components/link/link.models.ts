@@ -18,8 +18,8 @@ const onLinkClick = (evt: Event) => {
 
 const linksProps = {
   profile: {
-    title: `Profile`,
-    attrs: { class: `link`, href: routesPaths.PROFILE },
+    title: `Profile >`,
+    attrs: { class: `profile-link`, href: routesPaths.PROFILE },
     events: {
       click: [onLinkClick],
     },

@@ -1,3 +1,8 @@
 export const tpl: string = `
-  {{title}}
+  {{#if title}}
+    {{title}}
+  {{/if}}
+  {{#if a11y}}
+    <span class="visually-hidden">{{a11y}}</span>
+  {{/if}}
 `;

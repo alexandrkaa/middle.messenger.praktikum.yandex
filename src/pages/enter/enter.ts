@@ -1,9 +1,9 @@
 import { tpl } from "./enter.tpl";
 import { Block, TAll, TChild } from "../../system/block/block";
-import AuthController from "../../system/controllers/auth-controller/auth-controller";
 import { connect } from "../../utils/hoc";
 import { router } from "../../index";
 import { routesPaths } from "../../consts/routes";
+import { isLoggedIn } from "../../utils/is-logged-in";
 
 export interface TPageEnterProps extends TAll {
   title: string;
@@ -12,13 +12,6 @@ export interface TPageEnterProps extends TAll {
     class: string;
   };
 }
-
-const authController = new AuthController();
-// authController.logout();
-const isLoggedIn = async () => {
-  const data = await authController.getUser();
-  return data;
-};
 
 class PageEnter extends Block<TPageEnterProps> {
   constructor(props: TPageEnterProps, tagName: string = `main`) {

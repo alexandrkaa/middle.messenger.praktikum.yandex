@@ -13,7 +13,7 @@ import { Router } from "./system/router/router";
 import { IBlock } from "./system/router/route";
 import { routesPaths } from "./consts/routes";
 import PageChat from "./pages/chat/chat";
-import { propsPageChat } from "./pages/chat";
+import { propsPageChat } from "./pages/chat/chat.models";
 
 import { APP_MOUNT_POINT } from "./consts/consts";
 export const router = new Router(APP_MOUNT_POINT);

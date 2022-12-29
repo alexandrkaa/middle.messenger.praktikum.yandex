@@ -50,3 +50,28 @@ export const profilePasswordSubmit = new Button({
     class: `button`,
   },
 });
+
+export const addChatButton = new Button({
+  title: `Add chat`,
+  attrs: {
+    type: `button`,
+    class: `link add-chat`,
+    [`data-type`]: `add-chat`,
+  },
+});
+
+export const deleteChatBtn = new Button({
+  attrs: {
+    type: `button`,
+    class: `chat-text-block__delete-chat`,
+    [`aria-label`]: `delete chat`,
+  },
+});
+
+export const addRemoveUserModalBtn = new Button({
+  attrs: {
+    type: `button`,
+    class: `chat-text-block__control-users`,
+    [`aria-label`]: `add/remove user`,
+  },
+});

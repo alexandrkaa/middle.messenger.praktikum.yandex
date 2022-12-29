@@ -10,7 +10,7 @@ import {
 import { router } from "../../index";
 import { routesPaths } from "../../consts/routes";
 import { isEqual } from "../../utils/mydash";
-import AuthController from "../../system/controllers/auth-controller/auth-controller";
+import { isLoggedIn } from "../../utils/is-logged-in";
 
 export interface TProfileForm extends TAll {
   userName?: string;
@@ -22,14 +22,6 @@ export interface TProfileForm extends TAll {
     class: string;
   };
 }
-
-const authController = new AuthController();
-
-const isLoggedIn = async () => {
-  // const data = await authController.user();
-  const data = await authController.getUser();
-  return data;
-};
 
 class ProfileForm extends Block<TProfileForm> {
   constructor(props: TProfileForm, tagName: string = `form`) {

@@ -2,10 +2,12 @@ import { tpl } from "./button.tpl";
 import { Block, TAll } from "../../system/block/block";
 
 interface TButtonProps extends TAll {
-  title: string;
+  title?: string;
+  a11y?: string;
   attrs: {
     type: string;
     class: string;
+    [key: string]: string;
   };
 }
 

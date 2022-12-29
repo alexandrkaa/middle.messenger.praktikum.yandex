@@ -44,7 +44,7 @@ export abstract class Block<TProps extends TAll> {
   protected _meta: TMeta;
   protected props: TList;
   protected attrs: TAttrs;
-  protected children: TChildren;
+  public children: TChildren;
   private eventBus: EventBus;
   private _events: TEvents;
   protected isMounted: boolean;
@@ -167,6 +167,10 @@ export abstract class Block<TProps extends TAll> {
 
   get element() {
     return this._element;
+  }
+
+  get id() {
+    return this._id;
   }
 
   private _render() {
@@ -340,5 +344,12 @@ export abstract class Block<TProps extends TAll> {
   hide() {
     // console.log(this._element.parentElement);
     this._element.style.display = `none`;
+  }
+
+  getDataAttr(name: string): string | undefined {
+    if (this._element.dataset?.[name]) {
+      return this._element.dataset[name];
+    }
+    return undefined;
   }
 }
