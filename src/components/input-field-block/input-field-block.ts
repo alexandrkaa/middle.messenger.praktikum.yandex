@@ -1,5 +1,6 @@
 import { tpl } from "./input-field-block.tpl";
 import { Block, TAll } from "../../system/block/block";
+import { isEqual } from "../../utils/mydash";
 
 export interface TIFBProps extends TAll {
   type?: string;
@@ -34,6 +35,14 @@ export default class InputFieldBlock extends Block<TIFBProps> {
 
   set hasError(val) {
     this._hasError = Boolean(val);
+  }
+
+  componentDidUpdate(oldProps: TIFBProps, newProps: TIFBProps): boolean {
+    if (!isEqual(oldProps, newProps)) {
+      this.element.querySelector(`input`)?.focus();
+      return true;
+    }
+    return false;
   }
 
   render(): DocumentFragment {

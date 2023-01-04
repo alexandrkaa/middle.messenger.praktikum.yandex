@@ -7,9 +7,7 @@ export const tpl: string = `
       {{{chatHeader}}}
       <section class="chat-text-block__body">
         <!-- {{activeChatId}} -->
-        <ul class="chat-text-block__chat-messages chat-messages">
-          {{{chatMsgs}}}
-        </ul>
+        {{{chatMsgs}}}
       </section>
       {{{chatForm}}}
     </section>
@@ -32,3 +30,7 @@ export const tpl: string = `
 //     <span class="visually-hidden">Add / Remove user</span>
 //   </button>
 // </section>;
+
+// <ul class="chat-text-block__chat-messages chat-messages">
+//   {{{chatMsgs}}}
+// </ul>

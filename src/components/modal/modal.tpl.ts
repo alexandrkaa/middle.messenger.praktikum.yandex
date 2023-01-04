@@ -1,6 +1,6 @@
 export const tpl: string = `
 
-  <section class="modal-content user-action-modal">
+  <section class="modal-content">
     {{{modalContent}}}
   </section>
 

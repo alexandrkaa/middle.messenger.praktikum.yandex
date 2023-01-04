@@ -17,12 +17,19 @@
   position: absolute;
   z-index: 8001;
   padding: 15px;
+  // border: 1px solid $blue;
 }
 
 .modal--center .modal-content {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.modal--control-users {
+  top: 60px;
+  right: 125px;
+  left: auto;
 }
 
 .modal-header {
@@ -32,7 +39,7 @@
   text-align: center;
 }
 
-.user-action-modal {
+.user-action-modal .modal-content {
   width: 340px;
   padding: 30px;
   padding-top: 50px;
@@ -43,6 +50,16 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
+}
+
+.modal--control-users .modal-content {
+  width: 110px;
+  min-height: 50px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
 }
 
 .user-action-modal__submit {

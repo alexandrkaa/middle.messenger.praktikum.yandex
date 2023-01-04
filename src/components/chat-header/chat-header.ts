@@ -7,7 +7,10 @@ export interface TChatHeaderProps extends TAll {
   title?: string;
   avatar?: string;
   deleteChat?: TChild;
+  addRemoveUserModalBtn?: TChild;
   addRemoveUserModal?: TChild;
+  addUserModal?: TChild;
+  removeUserModal?: TChild;
   attrs?: {
     class: string;
     [key: string]: string;
@@ -25,11 +28,14 @@ class ChatHeader extends Block<TChatHeaderProps> {
   ): boolean {
     if (!isEqual(oldProps, newProps)) {
       if (newProps.chats && Array.isArray(newProps.chats)) {
+        // console.log(newProps);
         const chat = newProps.chats.find(
           (it) => it.id === newProps.activeChatId
         );
-        const { title, avatar } = chat;
-        this.setProps({ title: title, avatar: avatar });
+        if (chat) {
+          const { title, avatar } = chat;
+          this.setProps({ title: title, avatar: avatar });
+        }
       }
       return true;
     }

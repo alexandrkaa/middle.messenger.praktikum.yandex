@@ -7,6 +7,12 @@ import {
   validatePhone,
   inputErrorHelper,
 } from "../../utils/validate";
+import { LOGIN_LENGTH } from "../../consts/consts";
+
+// import ChatController from "../../system/controllers/chat-controller/chat-controller";
+// import { LOGIN_LENGTH } from "../../consts/consts";
+
+// const chatController = new ChatController();
 
 function loginFocusOutValidate(evt: FocusEvent): void {
   inputErrorHelper(validateLogin, evt, this);
@@ -159,6 +165,50 @@ const passwordProps2: TIFBProps = {
   },
 };
 
+const addChatFormInputProps: TIFBProps = {
+  type: `text`,
+  placeholderText: `Chat title`,
+  name: `form-field`,
+  // errorText: `Minimum ${LOGIN_LENGTH} chars`,
+  class: `field-block__text-input`,
+  attrs: {
+    class: `enter-form__field-block field-block`,
+  },
+  events: {
+    keyup: [onKeyUp],
+  },
+};
+
+const addUserFormInputProps: TIFBProps = {
+  type: `text`,
+  placeholderText: `User login (min ${LOGIN_LENGTH} chars)`,
+  name: `form-field`,
+  errorText: `Minimum ${LOGIN_LENGTH} chars`,
+  class: `field-block__text-input`,
+  attrs: {
+    class: `enter-form__field-block field-block`,
+  },
+  events: {
+    focusout: [loginFocusOutValidate],
+    keyup: [onKeyUp],
+  },
+};
+
+const removeUserFormInputProps: TIFBProps = {
+  type: `text`,
+  placeholderText: `User login (min ${LOGIN_LENGTH} chars)`,
+  name: `form-field`,
+  errorText: `Minimum ${LOGIN_LENGTH} chars`,
+  class: `field-block__text-input`,
+  attrs: {
+    class: `enter-form__field-block field-block`,
+  },
+  events: {
+    focusout: [loginFocusOutValidate],
+    keyup: [onKeyUp],
+  },
+};
+
 export const signInLoginField = new InputFieldBlock(signInLoginProps);
 export const signInPasswordField = new InputFieldBlock(signInPasswordProps);
 export const signUpLoginField = new InputFieldBlock(signUpLoginProps);
@@ -169,3 +219,9 @@ export const firstNameField = new InputFieldBlock(firstNameProps);
 export const lastNameField = new InputFieldBlock(secondNameProps);
 export const phoneField = new InputFieldBlock(phoneProps);
 export const password2Field = new InputFieldBlock(passwordProps2);
+
+export const addChatFormInputField = new InputFieldBlock(addChatFormInputProps);
+export const addUserFormInputField = new InputFieldBlock(addUserFormInputProps);
+export const removeUserFormInputField = new InputFieldBlock(
+  removeUserFormInputProps
+);

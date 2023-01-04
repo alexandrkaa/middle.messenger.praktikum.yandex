@@ -16,4 +16,17 @@
   &--red {
     color: #ff0000;
   }
+
+  &--control-user {
+    min-height: 22px;
+    background-image: url("../static/img/plus-circle.svg");
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    padding-left: 25px;
+  }
+
+  &--remove-user {
+    background-image: url("../static/img/cross-circle.svg");
+  }
 }

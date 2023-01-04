@@ -2,7 +2,7 @@ import { tpl } from "./modal.tpl";
 import { Block, TAll, TChild } from "../../system/block/block";
 
 export interface TModal extends TAll {
-  modalContent: TChild;
+  modalContent?: TChild;
   attrs?: Record<string, string>;
 }
 

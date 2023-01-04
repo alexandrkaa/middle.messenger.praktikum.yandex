@@ -2,7 +2,7 @@ import { TPageEnterProps } from "./enter";
 import {
   signInEnterForm,
   signUpEnterForm,
-} from "../../components/enter-form/enter-form.models";
+} from "../../components/form/form.models";
 import { getFormValues } from "../../utils/get-form-values";
 import AuthController, {
   TReg,

@@ -144,6 +144,7 @@
   background-position: center center;
   background-size: auto;
   background-repeat: no-repeat;
+  cursor: pointer;
 }
 
 .message-form__attachment {
@@ -207,6 +208,8 @@
 .chat-text-block__control-users {
   margin-left: 10px;
   background-image: url("../static/img/dots.svg");
+  border-radius: 50%;
+  border: solid 2px $blue;
 }
 
 .chat-messages {

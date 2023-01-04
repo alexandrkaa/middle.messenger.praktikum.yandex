@@ -2,25 +2,25 @@
 // BF Back to Front
 
 export type TSignUpFData = {
-  firstName: string;
-  secondName: string;
-  login: string;
-  email: string;
+  firstName?: string;
+  secondName?: string;
+  login?: string;
+  email?: string;
   password?: string;
-  phone: string;
-  displayName: string;
+  phone?: string;
+  displayName?: string;
   id?: number;
   avatar?: string | null | undefined;
 };
 
 export type TSignUpBData = {
-  first_name: string;
-  second_name: string;
-  login: string;
-  email: string;
+  first_name?: string;
+  second_name?: string;
+  login?: string;
+  email?: string;
   password?: string;
-  phone: string;
-  display_name: string;
+  phone?: string;
+  display_name?: string;
   id?: number;
   avatar?: string | null | undefined;
 };

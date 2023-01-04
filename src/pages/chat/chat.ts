@@ -15,7 +15,7 @@ export interface TPageChatProps extends TAll {
   attrs?: Record<string, string>;
 }
 
-const chatController = new ChatController();
+export const chatController = new ChatController();
 
 const getChats = async () => {
   return await chatController.getChats({});

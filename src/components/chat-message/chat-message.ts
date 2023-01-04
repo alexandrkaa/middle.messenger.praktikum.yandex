@@ -2,13 +2,13 @@ import { tpl } from "./chat-message.tpl";
 import { Block, TAll } from "../../system/block/block";
 
 export interface TChatMsgProps extends TAll {
-  isSelf: boolean;
-  text: string;
-  status: string;
-  time: string;
-  datetime: string;
-  attrs: {
-    class: string;
+  isSelf?: boolean;
+  text?: string;
+  status?: string;
+  time?: string;
+  datetime?: string;
+  attrs?: {
+    class?: string;
   };
 }
 

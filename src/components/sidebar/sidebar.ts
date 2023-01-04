@@ -8,6 +8,9 @@ import { Indexed } from "../../utils/mydash/merge";
 // import { router } from "../../index";
 // import { routesPaths } from "../../consts/routes";
 import { store } from "../../system/store/store";
+import ChatController from "../../system/controllers/chat-controller/chat-controller";
+
+export const chatController = new ChatController();
 
 export interface TPageSideBar extends TAll {
   profileLink?: TChild;
@@ -20,8 +23,11 @@ export interface TPageSideBar extends TAll {
 
 function onChatTabClick(evt: Event, chatId: number): void {
   evt.preventDefault();
-  // router.go(`${routesPaths.CHATS}/${chatId}`);
+  if (store.getState().activeChatId) {
+    chatController.closeChatWS(store.getState().activeChatId);
+  }
   store.set(`activeChatId`, chatId);
+  chatController.connectChat(chatId);
 }
 
 class SideBar extends Block<TPageSideBar> {
@@ -38,15 +44,22 @@ class SideBar extends Block<TPageSideBar> {
       if (newProps.chats) {
         if (Array.isArray(newProps.chats)) {
           if (!isEqual(newProps.chats, oldProps.chats as Indexed)) {
-            store.set(`activeChatId`, newProps.chats[0].id);
+            if (!store.getState().activeChatId) {
+              store.set(`activeChatId`, newProps.chats[0].id);
+            }
+            if (!Array.isArray(oldProps.chats)) {
+              chatController.connectChat(newProps.chats[0].id);
+            }
             this.children.chatTabs = newProps.chats.map((chat) => {
-              const onClick = (evt: Event) => onChatTabClick(evt, chat.id);
+              const onClick = (evt: Event) => {
+                onChatTabClick(evt, chat.id);
+              };
               return new ChatTab({
                 isSelf: chat.created_by === this.props.userId,
                 avatar:
                   chat.avatar ?? `https://via.placeholder.com/47?text=Logo`,
                 title: chat.title ?? `unnamed`,
-                time: `11:28`,
+                time: chat.time ?? null,
                 cnt: chat.unread_count ?? null,
                 attrs: {
                   class: `chats-list__item chat-tab`,
@@ -59,6 +72,9 @@ class SideBar extends Block<TPageSideBar> {
           }
         }
       }
+      //  else {
+      //   console.log(oldProps, newProps);
+      // }
       return true;
     }
     return false;
