@@ -9,6 +9,7 @@ export interface TChatMsgProps extends TAll {
   datetime?: string;
   attrs?: {
     class?: string;
+    id?: string;
   };
 }
 

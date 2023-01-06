@@ -21,6 +21,10 @@ class ChatMessages extends Block<TChatMsgsProps> {
     super(props, tagName);
   }
 
+  componentDidMount(): void {
+    this.element.scrollTop = this.element.scrollHeight;
+  }
+
   componentDidUpdate(
     oldProps: TChatMsgsProps,
     newProps: TChatMsgsProps
@@ -35,12 +39,14 @@ class ChatMessages extends Block<TChatMsgsProps> {
           time: `${dt.getHours()}:${dt.getMinutes()}`,
           datetime: msg.time,
           attrs: {
+            id: `scroller`,
             class: `chat-text-block__chat-message ${
               isSelf ? `chat-text-block__chat-message--self` : ``
-            } ${isSelf ? `chat-message--self` : ``}`,
+            } chat-message ${isSelf ? `chat-message--self` : ``}`,
           },
         });
       }) as TChild;
+      this.element.scrollTop = this.element.scrollHeight;
       return true;
     }
     return false;

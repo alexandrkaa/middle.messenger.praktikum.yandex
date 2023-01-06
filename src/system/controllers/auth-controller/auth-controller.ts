@@ -52,8 +52,8 @@ class AuthController {
         console.log(res);
       })
       .then(() => {
-        console.log(`routing...`);
-        router.go(routesPaths.PROFILE);
+        // console.log(`routing...`);
+        router.go(routesPaths.CHATS);
       })
       .catch((e) => console.log(JSON.parse(e.responseText)));
   }
@@ -65,6 +65,7 @@ class AuthController {
         return store.set("user", undefined);
       })
       .then(() => {
+        store.reset();
         router.go(routesPaths.SIGN_IN);
       })
       .catch((e) => console.log(e));
@@ -79,8 +80,7 @@ class AuthController {
       .then((data) => {
         return data as TSignUpBData;
       })
-      .catch((e) => {
-        console.log(e);
+      .catch(() => {
         store.set("user", undefined);
       });
   }

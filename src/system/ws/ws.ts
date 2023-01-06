@@ -7,7 +7,7 @@ export type TMessage = {
   time?: string;
   user_id?: string;
   content?: string;
-  type: `file` | `message` | `pong`;
+  type: `file` | `message` | `pong` | `user connected` | `get old` | `ping`;
   file?: {
     id: number;
     user_id: number;

@@ -19,10 +19,10 @@ class PageEnter extends Block<TPageEnterProps> {
   }
 
   async componentDidMount(): Promise<void> {
-    console.log(`Enter form: CDM`);
+    // console.log(`Enter form: CDM`);
     const data = await isLoggedIn();
     if (data) {
-      console.log(`Enter form: User is logged in. Routing to profile`);
+      // console.log(`Enter form: User is logged in. Routing to profile`);
       router.go(routesPaths.PROFILE);
     }
   }

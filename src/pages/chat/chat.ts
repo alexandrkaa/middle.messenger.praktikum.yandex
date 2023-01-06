@@ -5,6 +5,7 @@ import { router } from "../../index";
 import { routesPaths } from "../../consts/routes";
 import { isLoggedIn } from "../../utils/is-logged-in";
 import { connect } from "../../utils/hoc";
+import { store } from "../../system/store/store";
 
 export interface TPageChatProps extends TAll {
   sideBar?: TChild;
@@ -15,7 +16,7 @@ export interface TPageChatProps extends TAll {
   attrs?: Record<string, string>;
 }
 
-export const chatController = new ChatController();
+const chatController = new ChatController();
 
 const getChats = async () => {
   return await chatController.getChats({});
@@ -34,6 +35,16 @@ class PageChat extends Block<TPageChatProps> {
     await getChats();
     // const chats = await getChats();
     // console.log(chats);
+  }
+
+  componentDidUnmount(): void {
+    if (
+      this.props.activeChatId &&
+      typeof this.props.activeChatId === `number`
+    ) {
+      chatController.closeChatWS(this.props.activeChatId);
+    }
+    store.set(`activeChatId`, undefined);
   }
 
   render(): DocumentFragment {

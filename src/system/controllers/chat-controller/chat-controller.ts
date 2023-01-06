@@ -30,20 +30,36 @@ class ChatController {
     });
     ws.on(WEB_SOCKET_EVENTS.MESSAGE, (data: string) => {
       const _data: TMessage = JSON.parse(data);
-      if (_data.type !== `pong`) {
+      if (
+        _data.type !== `pong` &&
+        _data.type !== `user connected` &&
+        _data.type !== `get old` &&
+        _data.type !== `ping`
+      ) {
         this._saveMessage(chatId, _data);
       }
-      console.log(data);
+      // console.log(data);
     });
-    ws.on(WEB_SOCKET_EVENTS.CLOSE, (evt) => console.log(evt));
+    ws.on(WEB_SOCKET_EVENTS.CLOSE, () =>
+      console.log(`Chat ${chatId} connection closed`)
+    );
   }
 
   private _saveMessage(chatId: number, message: TMessage | TMessage[]): void {
     const msgs = store.getState().messages;
+    // console.log(message);
     if (msgs && msgs[chatId]) {
-      store.set(`messages.${chatId}`, [...msgs[chatId], message]);
+      store.set(
+        `messages.${chatId}`,
+        !Array.isArray(message)
+          ? [...msgs[chatId], message]
+          : [...msgs[chatId]].concat(message.reverse())
+      );
     } else {
-      store.set(`messages.${chatId}`, [message]);
+      store.set(
+        `messages.${chatId}`,
+        Array.isArray(message) ? message.reverse() : [message]
+      );
     }
     // console.log(store.getState().messages);
   }
@@ -72,6 +88,16 @@ class ChatController {
     this.WSockets[chatId].timerId = setInterval(() => {
       this.WSockets[chatId].message(`ping`, `ping`);
     }, 5000);
+
+    let unreadCnt = store
+      .getState()
+      .chats.find((it: TChatObj) => it.id === chatId).unread_count;
+    let start = 0;
+    while (unreadCnt >= 0) {
+      this.WSockets[chatId].getUnread(start);
+      start = start + 20;
+      unreadCnt -= 20;
+    }
   }
 
   public async sendMessage(message: string, chatId: number): Promise<void> {
@@ -83,7 +109,6 @@ class ChatController {
       clearInterval(this.WSockets[chatId].timerId);
       this.WSockets[chatId].close();
       delete this.WSockets[chatId];
-      console.log(`Chat ${chatId} closed`);
     } else {
       console.error(`Chat ${chatId} closing error`);
     }

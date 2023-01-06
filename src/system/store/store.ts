@@ -13,6 +13,10 @@ class Store extends EventBus {
     return this.state;
   }
 
+  public reset() {
+    this.state = {};
+  }
+
   public set(path: string, value: unknown) {
     const storeResult = set(this.state, path, value);
     this.emit(StoreEvents.Updated);

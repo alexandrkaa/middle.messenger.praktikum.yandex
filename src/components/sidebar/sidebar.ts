@@ -35,6 +35,15 @@ class SideBar extends Block<TPageSideBar> {
     super(props, tagName);
   }
 
+  componentDidMount(): void {
+    if (!store.getState().activeChatId) {
+      if (Array.isArray(this.props.chats)) {
+        store.set(`activeChatId`, this.props.chats[0].id);
+        chatController.connectChat(this.props.chats[0].id);
+      }
+    }
+  }
+
   componentDidUpdate(oldProps: TPageSideBar, newProps: TPageSideBar): boolean {
     if (!isEqual(oldProps, newProps)) {
       const modal = this.children.addChatFormModal as InstanceType<

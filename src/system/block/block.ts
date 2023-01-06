@@ -38,6 +38,7 @@ export abstract class Block<TProps extends TAll> {
     FLOW_CDM: "flow:component-did-mount",
     FLOW_RENDER: "flow:render",
     FLOW_CDU: "flow:component-did-update",
+    FLOW_CDUN: "flow:component-did-unmount",
   } as const;
 
   protected _element: HTMLElement;
@@ -87,6 +88,7 @@ export abstract class Block<TProps extends TAll> {
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CDUN, this._unmount.bind(this));
   }
 
   private _setAttrs(attrs: TAttrs) {
@@ -131,7 +133,6 @@ export abstract class Block<TProps extends TAll> {
   // Может переопределять пользователь, необязательно трогать
   // eslint-disable-next-line
   protected componentDidMount(): void {}
-  // componentDidMount() {}
 
   private dispatchComponentDidMount() {
     this.eventBus.emit(Block.EVENTS.FLOW_CDM);
@@ -157,14 +158,6 @@ export abstract class Block<TProps extends TAll> {
     return this.props;
   };
 
-  // public setChildren = (nextChildren: TChild):void => {
-  //   if (!nextChildren) {
-  //     return;
-  //   }
-
-  //   Object.assign(this.children, nextChildren);
-  // };
-
   get element() {
     return this._element;
   }
@@ -178,7 +171,6 @@ export abstract class Block<TProps extends TAll> {
     const block = this.render();
     this._element.innerHTML = ""; // удаляем предыдущее содержимое
     this._element.appendChild(block as unknown as DocumentFragment);
-    // console.log(this._element.innerHTML);
     this._addEvents();
 
     if (!this.isMounted) {
@@ -201,7 +193,6 @@ export abstract class Block<TProps extends TAll> {
       },
       set: (target, prop, value) => {
         const oldTarget = { ...target };
-        // const oldTarget = cloneDeep(target);
         target[prop] = value;
         this.eventBus.emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
@@ -213,16 +204,13 @@ export abstract class Block<TProps extends TAll> {
   }
 
   private _setId(element: HTMLElement) {
-    // console.log(this._id);
     if (this._id !== null) {
       element.setAttribute("data-id", this._id);
     }
   }
 
   private _createDocumentElement(tagName: string) {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     const element = document.createElement(tagName);
-    // this._setId(element);
     return element;
   }
 
@@ -285,7 +273,6 @@ export abstract class Block<TProps extends TAll> {
     const propsAndStubs = { ...(props as TAll) };
 
     Object.entries(this.children).forEach(([key, block]) => {
-      // console.log(key);
       if (Array.isArray(block)) {
         const line = block
           .map((it) => `<div data-id="${it._id}"></div>`)
@@ -301,14 +288,10 @@ export abstract class Block<TProps extends TAll> {
     ) as HTMLTemplateElement;
 
     const tpl = Handlebars.compile(template);
-    // const tpl = new Handlebars.SafeString(template);
-    // console.log(tpl);
     const strHtml = tpl(propsAndStubs);
-    // console.log(strHtml);
     fragment.innerHTML = strHtml;
 
     Object.values(this.children).forEach((block) => {
-      // console.log(block, Array.isArray(block));
       if (Array.isArray(block)) {
         block.forEach((it) => {
           const stub = fragment.content.querySelector(
@@ -328,13 +311,20 @@ export abstract class Block<TProps extends TAll> {
       }
     });
 
-    // return fragment.content.childNodes[0];
     return fragment.content;
   }
 
-  unmount() {
+  // eslint-disable-next-line
+  protected componentDidUnmount() {}
+
+  private _unmount() {
+    this.componentDidUnmount();
     this._removeEvents();
     this._element.parentElement!.innerHTML = ``;
+  }
+
+  unmount() {
+    this.eventBus.emit(Block.EVENTS.FLOW_CDUN);
   }
 
   show() {
