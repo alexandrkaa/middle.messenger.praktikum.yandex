@@ -12,6 +12,8 @@
     "esModuleInterop": true,
     "paths": {
       "handlebars": ["./node_modules/handlebars/types/index"]
-    }
-  }
+    },
+    "types": ["node", "mocha"]
+  },
+  "exclude": ["node_modules"]
 }

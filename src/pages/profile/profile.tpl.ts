@@ -1,29 +1,30 @@
 export const tpl: string = `
-<main class="profile-page">
+
   <article class="profile">
-    <a href="/" class="profile__back">
-      <span class="visually-hidden">Go back</span>
-    </a>
+    {{{profileBack}}}
     <section class="profile-main">
-      <img
-        class="profile-main__avatar"
-        src="{{avatarImgSrc}}"
-        alt="User avatar"
-      />
-      <h2 class="profile__person-name">{{userName}}</h2>
       {{{profileForm}}}
       <section class="profile-form">
-        <div class="profile-block profile-block--link">
-          <a href="./profile-edit.hbs" class="link">Update profile</a>
-        </div>
+        {{#if toProfile}}
         <div class="profile-block">
-          <a href="./profile-password.hbs" class="link">Update password</a>
+          {{{toProfile}}}
         </div>
+        {{/if}}
+        {{#if profileUpdate}}
+        <div class="profile-block">
+          {{{profileUpdate}}}
+        </div>
+        {{/if}}
+        {{#if profilePassword}}
+        <div class="profile-block">
+          {{{profilePassword}}}
+        </div>
+        {{/if}}
         <div>
-          <a href="#" class="link link--red">Logout</a>
+          {{{profileLogout}}}
         </div>
       </section>
     </section>
   </article>
-</main>
+
 `;

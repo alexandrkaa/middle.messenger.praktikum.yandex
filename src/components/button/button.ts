@@ -2,14 +2,18 @@ import { tpl } from "./button.tpl";
 import { Block, TAll } from "../../system/block/block";
 
 interface TButtonProps extends TAll {
-  type: string;
-  class: string;
-  title: string;
+  title?: string;
+  a11y?: string;
+  attrs: {
+    type: string;
+    class: string;
+    [key: string]: string;
+  };
 }
 
-export class Error extends Block<TButtonProps> {
-  constructor(props: TButtonProps) {
-    super(`div`, props);
+export default class Button extends Block<TButtonProps> {
+  constructor(props: TButtonProps, tagName: string = `button`) {
+    super(props, tagName);
   }
 
   render(): DocumentFragment {

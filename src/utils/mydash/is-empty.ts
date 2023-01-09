@@ -1,4 +1,15 @@
+// Аргументами могут быть:
+//   Object,
+//   Array,
+//   Map,
+//   Set,
+//   примитивы.
+// Значения 0 и другие Number, null, true, false, "", undefined, [], {} должны возвращать true.
+
 export const isEmpty = (value: unknown): boolean => {
+  if (Number.isNaN(value)) {
+    throw new Error(`Unsupported value`);
+  }
   if (value === null) {
     return true;
   }

@@ -1,42 +1,36 @@
 export const tpl: string = `
   <article class="chat">
     <h1 class="visually-hidden">Chat messenger App</h1>
-    <section class="chat__chats-list-block">
-      {{{profileLink}}}
-      <form class="chat__filter-form filter-form">
-        <input type="text" name="filter" class="filter-form__filter" />
-      </form>
-      <ul class="chat__chats-list chats-list">
-        {{{chatTabs}}}
-      </ul>
-    </section>
+    {{{sideBar}}}
+    {{#if activeChatId}}
     <section class="chat__chat-text-block chat-text-block">
-      <section class="chat-text-block__header">
-        <img
-          src="{{avatarSrc}}"
-          class="chat-text-block__avatar"
-          alt="User avatar"
-        />
-        <p class="chat-text-block__name"><b>{{name}}</b></p>
-        <button
-          aria-label="Delete chat"
-          class="chat-text-block__delete-chat"
-        >
-          <span class="visually-hidden">Delete chat</span>
-        </button>
-        <button class="chat-text-block__control-users">
-          <span class="visually-hidden">Add / Remove user</span>
-        </button>
-      </section>
+      {{{chatHeader}}}
       <section class="chat-text-block__body">
-        <ul class="chat-text-block__chat-messages chat-messages">
-          {{{chatMsgs}}}
-        </ul>
+        <!-- {{activeChatId}} -->
+        {{{chatMsgs}}}
       </section>
       {{{chatForm}}}
     </section>
+    {{/if}}
   </article>
 `;
 
 // > link/link class="profile-link" href="../profile/profile.hbs" title="Profile >"
 // https://via.placeholder.com/32
+
+// <section class="chat-text-block__header">
+//   <img src="{{avatar}}" class="chat-text-block__avatar" alt="User avatar" />
+//   <p class="chat-text-block__name">
+//     <b>{{ name }}</b>
+//   </p>
+//   <button aria-label="Delete chat" class="chat-text-block__delete-chat">
+//     <span class="visually-hidden">Delete chat</span>
+//   </button>
+//   <button class="chat-text-block__control-users">
+//     <span class="visually-hidden">Add / Remove user</span>
+//   </button>
+// </section>;
+
+// <ul class="chat-text-block__chat-messages chat-messages">
+//   {{{chatMsgs}}}
+// </ul>
