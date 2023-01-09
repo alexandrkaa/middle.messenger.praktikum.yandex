@@ -13,6 +13,7 @@
     "paths": {
       "handlebars": ["./node_modules/handlebars/types/index"]
     },
-    "types": ["node"]
-  }
+    "types": ["node", "mocha"]
+  },
+  "exclude": ["node_modules"]
 }

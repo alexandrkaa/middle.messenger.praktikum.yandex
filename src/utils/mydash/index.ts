@@ -1,12 +1,12 @@
-import { cloneDeep } from "./cloneDeep";
+import { cloneDeep } from "./clone-deep";
 import { first } from "./first";
 import { get } from "./get";
 import { identity } from "./identity";
-import { isEmpty } from "./is_empty";
-import { isEqual } from "./is_equal";
+import { isEmpty } from "./is-empty";
+import { isEqual } from "./is-equal";
 import { last } from "./last";
 import { merge } from "./merge";
-import { queryStringify } from "./query_stringify";
+import { queryStringify } from "./query-stringify";
 import { range } from "./range";
 import { set } from "./set";
 import { trim } from "./trim";

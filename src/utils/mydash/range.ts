@@ -4,7 +4,6 @@ export function range(
   step?: number,
   fromRight: boolean = false
 ) {
-  // TODO: добавить проверку на типы
   let _start = toFinite(start),
     _stop = end,
     _step = step;

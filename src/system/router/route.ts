@@ -1,5 +1,5 @@
 import { TList, Block, TAll } from "../block/block";
-import { isPlainObject } from "../../utils/mydash/is_equal";
+import { isPlainObject } from "../../utils/mydash/is-equal";
 import { render } from "../../utils/render";
 
 export interface IBlock extends Block<TAll> {
