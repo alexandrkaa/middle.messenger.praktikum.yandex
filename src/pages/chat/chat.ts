@@ -19,7 +19,7 @@ export interface TPageChatProps extends TAll {
 const chatController = new ChatController();
 
 const getChats = async () => {
-  return await chatController.getChats({});
+  return chatController.getChats({});
 };
 
 class PageChat extends Block<TPageChatProps> {

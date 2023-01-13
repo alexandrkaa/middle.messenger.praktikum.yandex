@@ -2,5 +2,5 @@ import AuthController from "../system/controllers/auth-controller/auth-controlle
 const authController = new AuthController();
 
 export const isLoggedIn = async () => {
-  return await authController.getUser();
+  return authController.getUser();
 };
