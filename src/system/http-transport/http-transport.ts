@@ -8,19 +8,21 @@ export type TOptions = Record<string, unknown> & {
   timeout?: number;
 };
 
+type HTTPMethod = (url: string, options?: TOptions) => Promise<unknown>;
+
 export class HTTPTransport {
   private _baseUrl: string;
   constructor(baseUrl: string) {
     this._baseUrl = baseUrl;
   }
-  get = (url: string, options: TOptions = { timeout: DEFAULT_TIMEOUT }) => {
+  get: HTTPMethod = (url, options = { timeout: DEFAULT_TIMEOUT }) => {
     options.method = METHODS.GET;
     return this.request(this._baseUrl + url, options, options.timeout);
   };
 
-  post = (
-    url: string,
-    options: TOptions = {
+  post: HTTPMethod = (
+    url,
+    options = {
       timeout: DEFAULT_TIMEOUT,
     }
   ) => {
@@ -28,14 +30,14 @@ export class HTTPTransport {
     return this.request(this._baseUrl + url, options, options.timeout);
   };
 
-  put = (url: string, options: TOptions = { timeout: DEFAULT_TIMEOUT }) => {
+  put: HTTPMethod = (url, options = { timeout: DEFAULT_TIMEOUT }) => {
     options.method = METHODS.PUT;
     return this.request(this._baseUrl + url, options, options.timeout);
   };
 
-  delete = (
-    url: string,
-    options: TOptions = {
+  delete: HTTPMethod = (
+    url,
+    options = {
       timeout: DEFAULT_TIMEOUT,
     }
   ) => {
@@ -85,7 +87,6 @@ export class HTTPTransport {
         xhr.send();
       } else {
         if (isFormData) {
-          console.log(`121`);
           xhr.send(data);
         } else {
           xhr.send(JSON.stringify(data));
