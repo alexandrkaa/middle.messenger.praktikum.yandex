@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self' localhost https://ya-praktikum.tech wss://ya-praktikum.tech;
+        script-src 'self' localhost 'unsafe-eval';
+        font-src 'self' localhost https://fonts.googleapis.com https://fonts.gstatic.com;
+        style-src 'self' localhost https://cdn.jsdelivr.net https://fonts.googleapis.com;
+        img-src 'self' localhost https://via.placeholder.com https://ya-praktikum.tech;
+      "
+    />
     <link
       href="https://fonts.googleapis.com/css?family=Inter"
       rel="stylesheet"
@@ -16,26 +26,8 @@
     <link rel="stylesheet" type="text/css" href="/src/styles.scss" />
     <title>Chat App</title>
   </head>
-  <body>
-    <nav class="menu">
-      <h1>Menu</h1>
-      <ul class="menu-list">
-        <li class="menu-item">
-          <a href="./pages/chat/index.html">Chat</a>
-        </li>
-        <li class="menu-item">
-          <a href="./pages/enter/signin.html">Sign In</a>
-        </li>
-        <li class="menu-item">
-          <a href="./pages/enter/signup.html">Sign Up</a>
-        </li>
-        <li class="menu-item">
-          <a href="./pages/profile/index.html">Profile</a>
-        </li>
-      </ul>
-    </nav>
-    <!-- <div class="app"></div> -->
-    <!-- <script src="./tmp.ts" type="module"></script> -->
-    <!-- <script src="./pages/chat/index.ts" type="module"></script> -->
+  <body class="app" id="app">
+    <!-- <div id="app" class="app"></div> -->
+    <script src="./index.ts" type="module"></script>
   </body>
 </html>

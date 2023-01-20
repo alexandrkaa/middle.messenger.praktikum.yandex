@@ -1,11 +1,11 @@
 export const tpl: string = `
   <img
-    src="{{imgSrc}}"
+    src="{{avatar}}"
     class="chat-tab__avatar"
     alt="User avatar"
   />
   <section class="chat-tab__header">
-    <p class="chat-tab__name"><b>{{name}}</b></p>
+    <p class="chat-tab__name"><b>{{title}}</b></p>
     <time datetime="{{datetime}}" class="chat-tab__time">{{time}}</time>
   </section>
   <section class="chat-tab__body">

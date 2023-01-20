@@ -2,19 +2,20 @@ import { tpl } from "./chat-message.tpl";
 import { Block, TAll } from "../../system/block/block";
 
 export interface TChatMsgProps extends TAll {
-  isSelf: boolean;
-  text: string;
-  status: string;
-  time: string;
-  datetime: string;
-  attrs: {
-    class: string;
+  isSelf?: boolean;
+  text?: string;
+  status?: string;
+  time?: string;
+  datetime?: string;
+  attrs?: {
+    class?: string;
+    id?: string;
   };
 }
 
 export class ChatMessage extends Block<TChatMsgProps> {
-  constructor(props: TChatMsgProps) {
-    super(`li`, props);
+  constructor(props: TChatMsgProps, tagName: string = `li`) {
+    super(props, tagName);
   }
 
   render(): DocumentFragment {

@@ -3,12 +3,30 @@
   font-size: 13px;
   line-height: 13px;
   text-decoration: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
 
   &:hover {
     text-decoration: underline;
+    cursor: pointer;
   }
 
   &--red {
     color: #ff0000;
+  }
+
+  &--control-user {
+    min-height: 22px;
+    background-image: url("../static/img/plus-circle.svg");
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    padding-left: 25px;
+  }
+
+  &--remove-user {
+    background-image: url("../static/img/cross-circle.svg");
   }
 }

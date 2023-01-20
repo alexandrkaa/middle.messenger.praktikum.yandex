@@ -1,7 +1,8 @@
 export const tpl: string = `
-  <button class="message-form__attachment" type="button">
+  <!-- <button class="message-form__attachment" type="button">
     <span class="visually-hidden">Add attachment</span>
-  </button>
+  </button> -->
+  <span>&nbsp;</span>
   <input
     type="text"
     class="message-form__input"

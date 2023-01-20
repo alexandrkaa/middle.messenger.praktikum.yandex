@@ -1,6 +1,6 @@
-import { Block } from "../system/block/block";
+import { Block, TAll } from "../system/block/block";
 
-function render(query: string, block: Block<Record<string, unknown>>) {
+function render(query: string, block: Block<TAll>) {
   const root = document.querySelector(query);
   if (!root) {
     return;

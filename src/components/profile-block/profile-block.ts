@@ -4,14 +4,21 @@ import { Block, TAll } from "../../system/block/block";
 export interface TProfileBlock extends TAll {
   title: string;
   value: string;
+  formName: string;
+  type: string;
   attrs: {
     class: string;
+    accept?: string;
   };
 }
 
-export class ProfileBlock extends Block<TProfileBlock> {
-  constructor(props: TProfileBlock) {
-    super(`div`, props);
+export default class ProfileBlock extends Block<TProfileBlock> {
+  constructor(props: TProfileBlock, tagName: string = `div`, _tpl?: string) {
+    super(props, tagName);
+  }
+
+  protected componentDidMount(): void {
+    // console.log(`ProfileBlock: CDM`);
   }
 
   render(): DocumentFragment {

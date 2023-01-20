@@ -1,5 +1,8 @@
 export const tpl: string = `
-  <button type="{{type}}" class="button {{class}}">
+  {{#if title}}
     {{title}}
-  </button>
+  {{/if}}
+  {{#if a11y}}
+    <span class="visually-hidden">{{a11y}}</span>
+  {{/if}}
 `;

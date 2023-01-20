@@ -1,24 +1,23 @@
 import { v4 as makeUUID } from "uuid";
 import { EventBus } from "../event-bus/event-bus";
 import Handlebars from "handlebars";
-import equal from "fast-deep-equal";
-// import cloneDeep from "clone-deep";
+import { isEqual } from "../../utils/mydash";
 
-type TMeta = {
+export type TMeta = {
   tagName: string;
   props: unknown;
 };
 
-type TList = {
+export type TList = {
   [key: string | symbol]: unknown;
 };
 
-type TAttrs = {
+export type TAttrs = {
   [key: string]: string;
 };
 
-type TEvent = (evt: Event) => void;
-type TEvents = Record<string, TEvent[]>;
+export type TEvent = (evt: Event) => void;
+export type TEvents = Record<string, TEvent[]>;
 
 export type TOneChild = InstanceType<typeof Block>;
 export type TChild = TOneChild | TOneChild[];
@@ -39,22 +38,27 @@ export abstract class Block<TProps extends TAll> {
     FLOW_CDM: "flow:component-did-mount",
     FLOW_RENDER: "flow:render",
     FLOW_CDU: "flow:component-did-update",
+    FLOW_CDUN: "flow:component-did-unmount",
   } as const;
 
   protected _element: HTMLElement;
   protected _meta: TMeta;
   protected props: TList;
   protected attrs: TAttrs;
-  private children: TChildren;
+  public children: TChildren;
   private eventBus: EventBus;
   private _events: TEvents;
+  protected isMounted: boolean;
   private readonly _id: string | null;
 
-  constructor(tagName = "div", propsAndChildren: TProps) {
+  constructor(propsAndChildren: TProps, tagName = "div") {
     const { children, props } = this._getChildren(propsAndChildren);
     // console.log(tagName);
     this.children = children;
     this._id = makeUUID();
+    this.isMounted = false;
+
+    this._events = {};
 
     if (
       props.hasOwnProperty(`settings`) &&
@@ -84,6 +88,7 @@ export abstract class Block<TProps extends TAll> {
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CDUN, this._unmount.bind(this));
   }
 
   private _setAttrs(attrs: TAttrs) {
@@ -111,18 +116,23 @@ export abstract class Block<TProps extends TAll> {
     this.componentDidMount();
 
     Object.values(this.children).forEach((child) => {
-      (child as TOneChild).dispatchComponentDidMount();
+      if (Array.isArray(child)) {
+        child.forEach((it) => it.dispatchComponentDidMount());
+      } else {
+        child.dispatchComponentDidMount();
+      }
     });
   }
 
   // Может переопределять пользователь, необязательно трогать
   componentDidUpdate(oldProps: TProps, newProps: TProps) {
-    const result = !equal(oldProps, newProps);
+    const result = !isEqual(oldProps, newProps);
     return result;
   }
 
   // Может переопределять пользователь, необязательно трогать
-  componentDidMount() {}
+  // eslint-disable-next-line
+  protected componentDidMount(): void {}
 
   private dispatchComponentDidMount() {
     this.eventBus.emit(Block.EVENTS.FLOW_CDM);
@@ -144,19 +154,32 @@ export abstract class Block<TProps extends TAll> {
     Object.assign(this.props, nextProps);
   };
 
+  getProps = (): TList => {
+    return this.props;
+  };
+
   get element() {
     return this._element;
+  }
+
+  get id() {
+    return this._id;
   }
 
   private _render() {
     this._removeEvents();
     const block = this.render();
     this._element.innerHTML = ""; // удаляем предыдущее содержимое
-    this._element.appendChild(block);
+    this._element.appendChild(block as unknown as DocumentFragment);
     this._addEvents();
+
+    if (!this.isMounted) {
+      this.isMounted = true;
+      this.dispatchComponentDidMount();
+    }
   }
 
-  abstract render(): DocumentFragment;
+  render() {}
 
   public getContent() {
     return this._element;
@@ -170,7 +193,6 @@ export abstract class Block<TProps extends TAll> {
       },
       set: (target, prop, value) => {
         const oldTarget = { ...target };
-        // const oldTarget = cloneDeep(target);
         target[prop] = value;
         this.eventBus.emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
@@ -182,16 +204,13 @@ export abstract class Block<TProps extends TAll> {
   }
 
   private _setId(element: HTMLElement) {
-    // console.log(this._id);
     if (this._id !== null) {
       element.setAttribute("data-id", this._id);
     }
   }
 
   private _createDocumentElement(tagName: string) {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     const element = document.createElement(tagName);
-    // this._setId(element);
     return element;
   }
 
@@ -202,10 +221,14 @@ export abstract class Block<TProps extends TAll> {
       if (keys.length > 0) {
         keys.forEach((eventName) => {
           events[eventName].forEach((handler: TEvent) => {
-            this._element.addEventListener(eventName, handler);
+            const _event = handler.bind(this);
+            if (!this._events[eventName]) {
+              this._events[eventName] = [];
+            }
+            this._events[eventName].push(_event);
+            this._element.addEventListener(eventName, _event);
           });
         });
-        this._events = events as TEvents;
       }
     }
   }
@@ -250,7 +273,6 @@ export abstract class Block<TProps extends TAll> {
     const propsAndStubs = { ...(props as TAll) };
 
     Object.entries(this.children).forEach(([key, block]) => {
-      // console.log(key);
       if (Array.isArray(block)) {
         const line = block
           .map((it) => `<div data-id="${it._id}"></div>`)
@@ -266,34 +288,43 @@ export abstract class Block<TProps extends TAll> {
     ) as HTMLTemplateElement;
 
     const tpl = Handlebars.compile(template);
-    // const tpl = new Handlebars.SafeString(template);
-    // console.log(tpl);
     const strHtml = tpl(propsAndStubs);
-    // console.log(strHtml);
     fragment.innerHTML = strHtml;
 
     Object.values(this.children).forEach((block) => {
       if (Array.isArray(block)) {
         block.forEach((it) => {
           const stub = fragment.content.querySelector(
-            `[data-id="${(it as InstanceType<typeof Block>)._id}"]`
+            `[data-id="${(it as TOneChild)._id}"]`
           );
           if (stub) {
-            stub.replaceWith((it as InstanceType<typeof Block>).getContent());
+            stub.replaceWith((it as TOneChild).getContent());
           }
         });
       } else {
         const stub = fragment.content.querySelector(
-          `[data-id="${(block as InstanceType<typeof Block>)._id}"]`
+          `[data-id="${(block as TOneChild)._id}"]`
         );
         if (stub) {
-          stub.replaceWith((block as InstanceType<typeof Block>).getContent());
+          stub.replaceWith((block as TOneChild).getContent());
         }
       }
     });
 
-    // return fragment.content.childNodes[0];
     return fragment.content;
+  }
+
+  // eslint-disable-next-line
+  protected componentDidUnmount() {}
+
+  private _unmount() {
+    this.componentDidUnmount();
+    this._removeEvents();
+    this._element.parentElement!.innerHTML = ``;
+  }
+
+  unmount() {
+    this.eventBus.emit(Block.EVENTS.FLOW_CDUN);
   }
 
   show() {
@@ -301,6 +332,14 @@ export abstract class Block<TProps extends TAll> {
   }
 
   hide() {
+    // console.log(this._element.parentElement);
     this._element.style.display = `none`;
+  }
+
+  getDataAttr(name: string): string | undefined {
+    if (this._element.dataset?.[name]) {
+      return this._element.dataset[name];
+    }
+    return undefined;
   }
 }
