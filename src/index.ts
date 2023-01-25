@@ -1,4 +1,5 @@
 // import IndexPage from "./pages/index";
+import "./styles.scss";
 import Page500 from "./pages/error/500";
 import Page404 from "./pages/error/404";
 import PageEnter from "./pages/enter/enter";

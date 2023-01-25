@@ -10,7 +10,7 @@
         default-src 'self' localhost https://ya-praktikum.tech wss://ya-praktikum.tech;
         script-src 'self' localhost 'unsafe-eval';
         font-src 'self' localhost https://fonts.googleapis.com https://fonts.gstatic.com;
-        style-src 'self' localhost https://cdn.jsdelivr.net https://fonts.googleapis.com;
+        style-src 'self' 'unsafe-inline' localhost https://cdn.jsdelivr.net https://fonts.googleapis.com;
         img-src 'self' localhost https://via.placeholder.com https://ya-praktikum.tech;
       "
     />
@@ -23,11 +23,11 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css"
     />
-    <link rel="stylesheet" type="text/css" href="/src/styles.scss" />
+    <!-- <link rel="stylesheet" type="text/css" href="/src/styles.scss" /> -->
     <title>Chat App</title>
   </head>
   <body class="app" id="app">
     <!-- <div id="app" class="app"></div> -->
-    <script src="./index.ts" type="module"></script>
+    <!-- <script src="./index.ts" type="module"></script> -->
   </body>
 </html>
