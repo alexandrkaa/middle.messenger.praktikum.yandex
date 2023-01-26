@@ -1,7 +1,8 @@
-FROM ubuntu:18.04
-RUN apt update && apt install -y nodejs && apt install -y npm
+FROM node:latest
 WORKDIR /var/www
-COPY ./simple-server.js simple-server.js
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build-prod
 EXPOSE 3000
-CMD node simple-server.js
-
+CMD node server/app.js

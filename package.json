@@ -5,11 +5,16 @@
   "scripts": {
     "dev": "npm run clean && cross-env NODE_ENV=development webpack-dev-server --mode development --open",
     "build-dev": "npm run clean && cross-env NODE_ENV=development webpack --mode development",
-    "build-prod": "npm run clean && cross-env NODE_ENV=production webpack --mode production",
+    "build-prod": "cross-env NODE_ENV=production webpack --mode production",
     "server": "node ./server/app.js",
     "clean": "rimraf dist",
     "start": "npm run build-prod && npm run server",
     "test": "mocha"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test"
+    }
   },
   "repository": {
     "type": "git",
@@ -47,6 +52,7 @@
     "fs": "0.0.1-security",
     "html-loader": "4.2.0",
     "html-webpack-plugin": "5.5.0",
+    "husky": "^8.0.3",
     "jsdom": "21.1.0",
     "jsdom-xhr-patch": "1.1.0",
     "mini-css-extract-plugin": "2.7.2",
