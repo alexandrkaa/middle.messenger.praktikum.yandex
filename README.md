@@ -53,6 +53,7 @@ npm run start
 
 [Макет](https://www.figma.com/file/XC7oYu8NTsgsuO0ijSfJyY/Chat_external_link_MY?node-id=0%3A1)
 
-## **Ссылка на сборку в Heroku**
+## **Ссылки на сборки**
 
-[https://chat-590.herokuapp.com/](https://chat-590.herokuapp.com//)
+[chat-590.herokuapp.com](https://chat-590.herokuapp.com//)
+[silly-moxie-74fef6.netlify.app](https://silly-moxie-74fef6.netlify.app/)
