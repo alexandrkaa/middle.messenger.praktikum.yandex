@@ -14,8 +14,10 @@ export interface TFormProps extends TAll {
 
 class Form extends Block<TFormProps> {
   private _hasError: boolean;
+
   public data: Record<string, unknown>;
-  constructor(props: TFormProps, tagName: string = `form`) {
+
+  constructor(props: TFormProps, tagName = `form`) {
     super(props, tagName);
     this.data = {};
   }

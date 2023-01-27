@@ -24,7 +24,7 @@ export interface TProfileForm extends TAll {
 }
 
 class ProfileForm extends Block<TProfileForm> {
-  constructor(props: TProfileForm, tagName: string = `form`) {
+  constructor(props: TProfileForm, tagName = `form`) {
     super(props, tagName);
   }
 
@@ -49,7 +49,7 @@ class ProfileForm extends Block<TProfileForm> {
       if (Array.isArray(pf)) {
         const fields = signUpFBAdapter(this.getProps().user as TSignUpFData);
         pf.forEach((it) => it.setProps({ value: `` }));
-        for (let field in fields) {
+        for (const field in fields) {
           pf.find((it) => it.getProps().formName === field)?.setProps({
             value: fields[field as keyof TSignUpBData],
           });
@@ -65,7 +65,7 @@ class ProfileForm extends Block<TProfileForm> {
       if (Array.isArray(pf) && this.props.user) {
         const fields = signUpFBAdapter(this.props.user as TSignUpFData);
         pf.forEach((it) => it.setProps({ value: `` }));
-        for (let field in fields) {
+        for (const field in fields) {
           pf.find((it) => it.getProps().formName === field)?.setProps({
             value: fields[field as keyof TSignUpBData],
           });

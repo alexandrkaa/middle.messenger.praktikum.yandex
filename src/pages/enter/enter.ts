@@ -14,7 +14,7 @@ export interface TPageEnterProps extends TAll {
 }
 
 class PageEnter extends Block<TPageEnterProps> {
-  constructor(props: TPageEnterProps, tagName: string = `main`) {
+  constructor(props: TPageEnterProps, tagName = `main`) {
     super(props, tagName);
   }
 

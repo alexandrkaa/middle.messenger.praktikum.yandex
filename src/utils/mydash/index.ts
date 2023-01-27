@@ -10,8 +10,7 @@ import { queryStringify } from "./query-stringify";
 import { range } from "./range";
 import { set } from "./set";
 import { trim } from "./trim";
-import { isNumber } from "./type-guards";
-import { isString } from "./type-guards";
+import { isNumber, isString } from "./type-guards";
 
 export {
   cloneDeep,

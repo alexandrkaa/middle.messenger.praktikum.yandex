@@ -18,12 +18,10 @@ export interface TPageChatProps extends TAll {
 
 const chatController = new ChatController();
 
-const getChats = async () => {
-  return chatController.getChats({});
-};
+const getChats = async () => chatController.getChats({});
 
 class PageChat extends Block<TPageChatProps> {
-  constructor(props: TPageChatProps, tagName: string = `main`) {
+  constructor(props: TPageChatProps, tagName = `main`) {
     super(props, tagName);
   }
 
@@ -39,8 +37,8 @@ class PageChat extends Block<TPageChatProps> {
 
   componentDidUnmount(): void {
     if (
-      this.props.activeChatId &&
-      typeof this.props.activeChatId === `number`
+      this.props.activeChatId
+      && typeof this.props.activeChatId === `number`
     ) {
       chatController.closeChatWS(this.props.activeChatId);
     }

@@ -5,10 +5,10 @@ import { chatForm } from "../../components/chat-form/chat-form.models";
 import { chatMessages } from "../../components/chat-messages/chat-messages.models";
 
 export const propsPageChat: TPageChatProps = {
-  sideBar: sideBar,
+  sideBar,
   chatMsgs: chatMessages,
-  chatForm: chatForm,
-  chatHeader: chatHeader,
+  chatForm,
+  chatHeader,
   attrs: {
     class: `chat-page`,
   },

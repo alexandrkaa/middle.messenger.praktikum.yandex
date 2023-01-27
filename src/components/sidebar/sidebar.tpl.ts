@@ -1,4 +1,4 @@
-export const tpl: string = `
+export const tpl = `
 
   <section class="chat__sidebar-nav">
     {{{addChatBtn}}}

@@ -12,9 +12,11 @@ type HTTPMethod = (url: string, options?: TOptions) => Promise<unknown>;
 
 export class HTTPTransport {
   private _baseUrl: string;
+
   constructor(baseUrl: string) {
     this._baseUrl = baseUrl;
   }
+
   get: HTTPMethod = (url, options = { timeout: DEFAULT_TIMEOUT }) => {
     options.method = METHODS.GET;
     return this.request(this._baseUrl + url, options, options.timeout);
@@ -24,7 +26,7 @@ export class HTTPTransport {
     url,
     options = {
       timeout: DEFAULT_TIMEOUT,
-    }
+    },
   ) => {
     options.method = METHODS.POST;
     return this.request(this._baseUrl + url, options, options.timeout);
@@ -39,18 +41,18 @@ export class HTTPTransport {
     url,
     options = {
       timeout: DEFAULT_TIMEOUT,
-    }
+    },
   ) => {
     options.method = METHODS.DELETE;
     return this.request(this._baseUrl + url, options, options.timeout);
   };
 
-  request = (url: string, options: TOptions, timeout: number = 5000) => {
+  request = (url: string, options: TOptions, timeout = 5000) => {
     const { headers = {}, method, data } = options;
 
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
       if (!method) {
-        reject("No method");
+        reject(`No method`);
         return;
       }
 
@@ -78,19 +80,17 @@ export class HTTPTransport {
       };
 
       if (isFormData) {
-        xhr.setRequestHeader("accept", "application/json");
+        xhr.setRequestHeader(`accept`, `application/json`);
       } else {
-        xhr.setRequestHeader("content-type", "application/json");
+        xhr.setRequestHeader(`content-type`, `application/json`);
       }
 
       if (isGet) {
         xhr.send();
+      } else if (isFormData) {
+        xhr.send(data);
       } else {
-        if (isFormData) {
-          xhr.send(data);
-        } else {
-          xhr.send(JSON.stringify(data));
-        }
+        xhr.send(JSON.stringify(data));
       }
     });
   };

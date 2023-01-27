@@ -2,11 +2,11 @@ export function range(
   start: number,
   end?: number,
   step?: number,
-  fromRight: boolean = false
+  fromRight = false,
 ) {
-  let _start = toFinite(start),
-    _stop = end,
-    _step = step;
+  let _start = toFinite(start);
+  let _stop = end;
+  let _step = step;
   const result: number[] = [];
 
   if (_stop === undefined) {
@@ -29,7 +29,7 @@ export function range(
   let index = -1;
   let length = Math.max(
     Math.ceil(((_stop as number) - _start) / (_step || 1)),
-    0
+    0,
   );
 
   while (length--) {

@@ -14,8 +14,8 @@ const error = new Error({
 // console.log(error);
 
 export class Page404 extends Block<T404Props> {
-  constructor(props: T404Props, tagName: string = `article`) {
-    super({ ...props, error: error }, tagName);
+  constructor(props: T404Props, tagName = `article`) {
+    super({ ...props, error }, tagName);
   }
 
   render(): DocumentFragment {

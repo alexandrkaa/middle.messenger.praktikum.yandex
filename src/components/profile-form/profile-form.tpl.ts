@@ -1,4 +1,4 @@
-export const tpl: string = `
+export const tpl = `
   <img
     class="profile-main__avatar profile-main__avatar-img"
     src="{{#if avatarImgSrc}}https://ya-praktikum.tech/api/v2/resources{{avatarImgSrc}}{{/if}}"

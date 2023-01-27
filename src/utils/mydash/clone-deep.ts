@@ -1,4 +1,6 @@
+// eslint-disable-next-line
 export function cloneDeep(obj: any) {
+  // eslint-disable-next-line
   return (function _cloneDeep(item: any) {
     // Handle:
     // * null
@@ -8,7 +10,7 @@ export function cloneDeep(obj: any) {
     // * string
     // * symbol
     // * function
-    if (item === null || typeof item !== "object") {
+    if (item === null || typeof item !== `object`) {
       return item;
     }
 

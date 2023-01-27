@@ -14,7 +14,7 @@ export interface TChatMsgProps extends TAll {
 }
 
 export class ChatMessage extends Block<TChatMsgProps> {
-  constructor(props: TChatMsgProps, tagName: string = `li`) {
+  constructor(props: TChatMsgProps, tagName = `li`) {
     super(props, tagName);
   }
 

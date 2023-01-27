@@ -21,21 +21,21 @@ class ProfileAPI extends BaseAPI {
   public updateProfile(optionsAndData: TReg): Promise<unknown> {
     return profileAPIInstance.put(
       `${PROFILE_BASE_URL}/profile`,
-      optionsAndData
+      optionsAndData,
     );
   }
 
   public updateAvatar(optionsAndData: TReg): Promise<unknown> {
     return profileAPIInstance.put(
       `${PROFILE_BASE_URL}/profile/avatar`,
-      optionsAndData
+      optionsAndData,
     );
   }
 
   public updatePassword(optionsAndData: TPassword): Promise<unknown> {
     return profileAPIInstance.put(
       `${PROFILE_BASE_URL}/password`,
-      optionsAndData
+      optionsAndData,
     );
   }
 }

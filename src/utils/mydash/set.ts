@@ -5,19 +5,19 @@ function set(
   path: string,
   value: unknown
 ): Indexed | unknown {
-  if (typeof object !== "object" || object === null) {
+  if (typeof object !== `object` || object === null) {
     return object;
   }
 
-  if (typeof path !== "string") {
-    throw new Error("path must be string");
+  if (typeof path !== `string`) {
+    throw new Error(`path must be string`);
   }
 
-  const result = path.split(".").reduceRight<Indexed>(
+  const result = path.split(`.`).reduceRight<Indexed<unknown>>(
     (acc, key) => ({
       [key]: acc,
     }),
-    value as any
+    value as Indexed<unknown>
   );
   return merge(object as Indexed, result);
 }

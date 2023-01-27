@@ -61,9 +61,7 @@ class AuthController {
   public async logout() {
     return authApi
       .logOut()
-      .then(() => {
-        return store.set("user", undefined);
-      })
+      .then(() => store.set(`user`, undefined))
       .then(() => {
         store.reset();
         router.go(routesPaths.SIGN_IN);
@@ -74,14 +72,10 @@ class AuthController {
   public async user() {
     return authApi
       .user()
-      .then((res: TResponse) => {
-        return store.set("user", signUpBFAdapter(JSON.parse(res.response)));
-      })
-      .then((data) => {
-        return data as TSignUpBData;
-      })
+      .then((res: TResponse) => store.set(`user`, signUpBFAdapter(JSON.parse(res.response))))
+      .then((data) => data as TSignUpBData)
       .catch(() => {
-        store.set("user", undefined);
+        store.set(`user`, undefined);
       });
   }
 

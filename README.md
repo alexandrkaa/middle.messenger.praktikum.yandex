@@ -7,6 +7,13 @@
 1. Скачать репозиторий (git clone `URL`)
 2. Установить зависимости (npm install в директории проекта)
 
+## Deploy проекта на Heroku
+
+1. docker build -t chat .
+   1.1 при сборке контейнера на компьютерах Mac с процессором M1 - руководствоваться [статьей по сборке](https://medium.com/geekculture/from-apple-silicon-to-heroku-docker-registry-without-swearing-36a2f59b30a3)
+2. heroku container:push web
+3. heroku container:release web
+
 ## Запуск и сборка проекта
 
 #### Запуск в режиме разработки
@@ -18,7 +25,7 @@ npm run dev
 #### Сборка проекта
 
 ```
-npm run build
+npm run build-prod
 ```
 
 #### Запуск проекта
@@ -33,6 +40,8 @@ npm run start
 2. Sass
 3. TypeScript
 4. UUID
+5. WebPack
+6. Docker
 
 ## Реализованный функционал
 
@@ -44,6 +53,7 @@ npm run start
 
 [Макет](https://www.figma.com/file/XC7oYu8NTsgsuO0ijSfJyY/Chat_external_link_MY?node-id=0%3A1)
 
-## **Ссылка на сборку в Netlify**
+## **Ссылки на сборки**
 
-[https://silly-moxie-74fef6.netlify.app](https://silly-moxie-74fef6.netlify.app/)
+[chat-590.herokuapp.com](https://chat-590.herokuapp.com//)
+[silly-moxie-74fef6.netlify.app](https://silly-moxie-74fef6.netlify.app/)

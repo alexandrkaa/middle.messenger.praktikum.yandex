@@ -13,7 +13,7 @@ export interface TProfileBlock extends TAll {
 }
 
 export default class ProfileBlock extends Block<TProfileBlock> {
-  constructor(props: TProfileBlock, tagName: string = `div`, _tpl?: string) {
+  constructor(props: TProfileBlock, tagName = `div`) {
     super(props, tagName);
   }
 

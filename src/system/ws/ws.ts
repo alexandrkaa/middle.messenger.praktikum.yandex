@@ -1,6 +1,5 @@
 import { EventBus } from "../event-bus/event-bus";
-import { WS_API_BASE_URL } from "../../consts/consts";
-import { WEB_SOCKET_EVENTS } from "../../consts/consts";
+import { WS_API_BASE_URL, WEB_SOCKET_EVENTS } from "../../consts/consts";
 
 export type TMessage = {
   id?: string;
@@ -21,14 +20,16 @@ export type TMessage = {
 
 class WSocket extends EventBus {
   public socket: WebSocket;
+
   public timerId: NodeJS.Timer | undefined = undefined;
+
   constructor(token: string, chatId: number, userId: number) {
     super();
     if (!token || !chatId || !userId) {
       throw new Error(`openSocket: Required parameter is missing.`);
     }
     this.socket = new WebSocket(
-      `${WS_API_BASE_URL}/chats/${userId}/${chatId}/${token}`
+      `${WS_API_BASE_URL}/chats/${userId}/${chatId}/${token}`,
     );
   }
 
@@ -38,7 +39,7 @@ class WSocket extends EventBus {
     }
 
     const dataObj: Record<string, unknown> = {
-      type: type,
+      type,
     };
     if (message) {
       dataObj.content = message;

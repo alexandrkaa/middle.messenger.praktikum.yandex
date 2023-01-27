@@ -18,23 +18,23 @@ export interface TChatHeaderProps extends TAll {
 }
 
 class ChatHeader extends Block<TChatHeaderProps> {
-  constructor(props: TChatHeaderProps, tagName: string = `section`) {
+  constructor(props: TChatHeaderProps, tagName = `section`) {
     super(props, tagName);
   }
 
   componentDidUpdate(
     oldProps: TChatHeaderProps,
-    newProps: TChatHeaderProps
+    newProps: TChatHeaderProps,
   ): boolean {
     if (!isEqual(oldProps, newProps)) {
       if (newProps.chats && Array.isArray(newProps.chats)) {
         // console.log(newProps);
         const chat = newProps.chats.find(
-          (it) => it.id === newProps.activeChatId
+          (it) => it.id === newProps.activeChatId,
         );
         if (chat) {
           const { title, avatar } = chat;
-          this.setProps({ title: title, avatar: avatar });
+          this.setProps({ title, avatar });
         }
       }
       return true;

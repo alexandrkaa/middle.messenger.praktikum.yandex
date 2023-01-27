@@ -1,4 +1,4 @@
-export const tpl: string = `
+export const tpl = `
   {{#if formTitle}}
     <h2 class="modal-header">{{formTitle}}</h2>
   {{/if}}

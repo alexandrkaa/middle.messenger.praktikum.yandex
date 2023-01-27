@@ -8,6 +8,7 @@ export function connect(
     new (props: TAll, tagName?: string): Block<TAll>;
   } & typeof Block<TAll>,
   mapStateToProps: (state: Indexed) => Indexed = (state) => state
+  // eslint-disable-next-line
 ): any {
   return class extends Component {
     constructor(props: TAll, tagName: string) {

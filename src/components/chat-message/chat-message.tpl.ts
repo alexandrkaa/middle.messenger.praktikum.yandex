@@ -1,4 +1,4 @@
-export const tpl: string = `
+export const tpl = `
   <p class="chat-message__content">{{text}}</p>
   {{#if status}}
     <span class="chat-message__status chat-message__status--{{status}}">

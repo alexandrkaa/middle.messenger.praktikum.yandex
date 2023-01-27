@@ -3,7 +3,7 @@ import { Indexed } from "../../utils/mydash/merge";
 import { EventBus } from "../event-bus/event-bus";
 
 enum StoreEvents {
-  Updated = "updated",
+  Updated = `updated`,
 }
 
 class Store extends EventBus {

@@ -10,7 +10,7 @@ interface TLinkProps extends TAll {
 }
 
 export default class Link extends Block<TLinkProps> {
-  constructor(props: TLinkProps, tagName: string = `a`) {
+  constructor(props: TLinkProps, tagName = `a`) {
     super(props, tagName);
   }
 

@@ -1,4 +1,4 @@
-export const tpl: string = `
+export const tpl = `
   <div class="error-page">
     <article class="error">
       <h1 class="error__header">{{errorCode}}</h1>

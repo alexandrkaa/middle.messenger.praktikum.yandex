@@ -1,4 +1,4 @@
-export const tpl: string = `
+export const tpl = `
   <!-- <button class="message-form__attachment" type="button">
     <span class="visually-hidden">Add attachment</span>
   </button> -->

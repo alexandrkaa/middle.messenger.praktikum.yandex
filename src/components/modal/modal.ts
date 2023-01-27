@@ -7,7 +7,7 @@ export interface TModal extends TAll {
 }
 
 export default class Modal extends Block<TModal> {
-  constructor(props: TModal, tagName: string = `section`) {
+  constructor(props: TModal, tagName = `section`) {
     super(props, tagName);
     this.hide();
   }

@@ -13,7 +13,7 @@ export class EventBus {
 
   off(event: string, callback: Handler): void {
     this.listeners[event] = this.listeners[event].filter(
-      (evt) => evt !== callback
+      (evt) => evt !== callback,
     );
   }
 

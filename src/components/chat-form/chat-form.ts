@@ -4,6 +4,7 @@ import { connect } from "../../utils/hoc";
 
 export interface TChatFormProps extends TAll {
   placeHolder: string;
+  // eslint-disable-next-line
   events: { [key: string]: ((evt: Event) => void)[] };
   activeChatId?: number;
   attrs: {
@@ -14,7 +15,7 @@ export interface TChatFormProps extends TAll {
 }
 
 class ChatForm extends Block<TChatFormProps> {
-  constructor(props: TChatFormProps, tagName: string = `form`) {
+  constructor(props: TChatFormProps, tagName = `form`) {
     super(props, tagName);
   }
 

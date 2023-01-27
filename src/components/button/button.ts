@@ -12,7 +12,7 @@ interface TButtonProps extends TAll {
 }
 
 export default class Button extends Block<TButtonProps> {
-  constructor(props: TButtonProps, tagName: string = `button`) {
+  constructor(props: TButtonProps, tagName = `button`) {
     super(props, tagName);
   }
 
