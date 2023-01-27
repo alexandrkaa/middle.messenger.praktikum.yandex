@@ -1,8 +1,4 @@
 type Primitive = string | number | boolean;
-type StOrNum = string | number;
-export type SafeNestedMap = {
-  [key in StOrNum]: SafeNestedMap;
-};
 
 const isPrimitive = (val: unknown): boolean => {
   switch (typeof val) {
@@ -18,12 +14,14 @@ const isPrimitive = (val: unknown): boolean => {
 };
 
 export const get = (
-  obj: SafeNestedMap,
+  // eslint-disable-next-line
+  obj: any,
   path: string,
   defaultValue: Primitive | undefined = undefined
 ): Primitive | undefined => {
   const pathArr: string[] = path.split(`.`);
-  let result: SafeNestedMap | Primitive | undefined = obj[pathArr[0]];
+  // eslint-disable-next-line
+  let result: any = obj[pathArr[0]];
   if (isPrimitive(result)) {
     return result as unknown as Primitive;
   }
