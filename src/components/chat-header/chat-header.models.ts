@@ -29,10 +29,10 @@ function onChatHeaderClick(evt: Event): void {
 const chatHeaderProps: TChatHeaderProps = {
   title: ``,
   deleteChat: deleteChatBtn,
-  addRemoveUserModalBtn: addRemoveUserModalBtn,
-  controlUsersModal: controlUsersModal,
-  addUserModal: addUserModal,
-  removeUserModal: removeUserModal,
+  addRemoveUserModalBtn,
+  controlUsersModal,
+  addUserModal,
+  removeUserModal,
   attrs: {
     class: `chat-text-block__header`,
   },

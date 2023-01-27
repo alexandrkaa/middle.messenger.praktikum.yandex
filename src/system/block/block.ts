@@ -1,6 +1,6 @@
 import { v4 as makeUUID } from "uuid";
-import { EventBus } from "../event-bus/event-bus";
 import Handlebars from "handlebars";
+import { EventBus } from "../event-bus/event-bus";
 import { isEqual } from "../../utils/mydash";
 
 export type TMeta = {
@@ -34,11 +34,11 @@ export type TAll = {
 
 export abstract class Block<TProps extends TAll> {
   static EVENTS = {
-    INIT: "init",
-    FLOW_CDM: "flow:component-did-mount",
-    FLOW_RENDER: "flow:render",
-    FLOW_CDU: "flow:component-did-update",
-    FLOW_CDUN: "flow:component-did-unmount",
+    INIT: `init`,
+    FLOW_CDM: `flow:component-did-mount`,
+    FLOW_RENDER: `flow:render`,
+    FLOW_CDU: `flow:component-did-update`,
+    FLOW_CDUN: `flow:component-did-unmount`,
   } as const;
 
   protected _element: HTMLElement;
@@ -51,9 +51,8 @@ export abstract class Block<TProps extends TAll> {
   protected isMounted: boolean;
   private readonly _id: string | null;
 
-  constructor(propsAndChildren: TProps, tagName = "div") {
+  constructor(propsAndChildren: TProps, tagName = `div`) {
     const { children, props } = this._getChildren(propsAndChildren);
-    // console.log(tagName);
     this.children = children;
     this._id = makeUUID();
     this.isMounted = false;
@@ -61,7 +60,7 @@ export abstract class Block<TProps extends TAll> {
     this._events = {};
 
     if (
-      props.hasOwnProperty(`settings`) &&
+      Object.prototype.hasOwnProperty.call(props, `settings`) &&
       (props.settings as TList)?.withInternalID === false
     ) {
       this._id = null;
@@ -154,9 +153,7 @@ export abstract class Block<TProps extends TAll> {
     Object.assign(this.props, nextProps);
   };
 
-  getProps = (): TList => {
-    return this.props;
-  };
+  getProps = (): TList => this.props;
 
   get element() {
     return this._element;
@@ -169,7 +166,7 @@ export abstract class Block<TProps extends TAll> {
   private _render() {
     this._removeEvents();
     const block = this.render();
-    this._element.innerHTML = ""; // удаляем предыдущее содержимое
+    this._element.innerHTML = ``; // удаляем предыдущее содержимое
     this._element.appendChild(block as unknown as DocumentFragment);
     this._addEvents();
 
@@ -179,6 +176,7 @@ export abstract class Block<TProps extends TAll> {
     }
   }
 
+  // eslint-disable-next-line
   render() {}
 
   public getContent() {
@@ -189,7 +187,7 @@ export abstract class Block<TProps extends TAll> {
     return new Proxy(props, {
       get: (target, prop) => {
         const value = target[prop as string];
-        return typeof value === "function" ? value.bind(this) : value;
+        return typeof value === `function` ? value.bind(this) : value;
       },
       set: (target, prop, value) => {
         const oldTarget = { ...target };
@@ -198,14 +196,14 @@ export abstract class Block<TProps extends TAll> {
         return true;
       },
       deleteProperty() {
-        throw new Error("Нет доступа");
+        throw new Error(`Нет доступа`);
       },
     });
   }
 
   private _setId(element: HTMLElement) {
     if (this._id !== null) {
-      element.setAttribute("data-id", this._id);
+      element.setAttribute(`data-id`, this._id);
     }
   }
 
@@ -284,7 +282,7 @@ export abstract class Block<TProps extends TAll> {
     });
 
     const fragment = this._createDocumentElement(
-      "template"
+      `template`
     ) as HTMLTemplateElement;
 
     const tpl = Handlebars.compile(template);
@@ -320,7 +318,9 @@ export abstract class Block<TProps extends TAll> {
   private _unmount() {
     this.componentDidUnmount();
     this._removeEvents();
-    this._element.parentElement!.innerHTML = ``;
+    if (this._element.parentElement) {
+      this._element.parentElement.innerHTML = ``;
+    }
   }
 
   unmount() {

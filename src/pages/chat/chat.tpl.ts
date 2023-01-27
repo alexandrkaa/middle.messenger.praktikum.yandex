@@ -1,4 +1,4 @@
-export const tpl: string = `
+export const tpl = `
   <article class="chat">
     <h1 class="visually-hidden">Chat messenger App</h1>
     {{{sideBar}}}

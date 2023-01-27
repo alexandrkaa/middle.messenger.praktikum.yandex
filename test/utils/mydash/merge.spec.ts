@@ -7,11 +7,11 @@ const mock = {
   result: { a: { b: 1, c: { d: 2 }, e: 3 } },
 };
 
-describe("MyDash utils / Merge", () => {
-  it("Merge should works correctly", () => {
+describe(`MyDash utils / Merge`, () => {
+  it(`Merge should works correctly`, () => {
     expect(
       JSON.stringify(merge(mock.obj1, mock.obj2)),
-      JSON.stringify(mock.result)
+      JSON.stringify(mock.result),
     );
   });
 });

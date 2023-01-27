@@ -14,7 +14,9 @@ export interface TIFBProps extends TAll {
 
 export default class InputFieldBlock extends Block<TIFBProps> {
   private _fieldValue: string;
+
   private _hasError: boolean;
+
   constructor(props: TIFBProps, tagName: string | undefined = undefined) {
     super(props, tagName);
     this._fieldValue = ``;
@@ -48,7 +50,11 @@ export default class InputFieldBlock extends Block<TIFBProps> {
   render(): DocumentFragment {
     const result = this.compile(tpl, this.props);
     if (this._fieldValue) {
-      result.querySelector(`input`)!.value = this._fieldValue;
+      const input = result.querySelector(`input`);
+      if (input) {
+        input.value = this._fieldValue;
+      }
+      // result.querySelector(`input`)!.value = this._fieldValue;
     }
     return result;
   }

@@ -36,9 +36,9 @@ export const validatePhone = (phone: TInput): boolean => {
 export const inputErrorHelper = (
   validator: (str: string) => boolean,
   evt: Event,
-  block: InputFieldBlock
+  block: InputFieldBlock,
 ) => {
-  const value = (evt.target as HTMLInputElement).value;
+  const { value } = evt.target as HTMLInputElement;
   if (!validator(value)) {
     block.hasError = true;
     block.setProps({

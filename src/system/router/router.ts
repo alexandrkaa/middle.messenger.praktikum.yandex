@@ -5,11 +5,17 @@ import Page404 from "../../pages/error/404";
 
 export class Router {
   public routes: Route[];
+
   public history: typeof window.history;
+
   private _rootQuery: string;
+
   private _currentRoute: null | Route;
+
   private _defaultPage: Route;
+
   static __instance: Router;
+
   constructor(rootQuery: string) {
     if (Router.__instance) {
       return Router.__instance;
@@ -25,7 +31,7 @@ export class Router {
       {
         rootQuery: this._rootQuery,
       },
-      null
+      null,
     );
     Router.__instance = this;
   }
@@ -38,7 +44,7 @@ export class Router {
       pathname,
       block,
       { rootQuery: this._rootQuery },
-      blockProps
+      blockProps,
     );
     this.routes.push(route);
     return this;
@@ -72,7 +78,7 @@ export class Router {
   }
 
   go(pathname: string) {
-    this.history.pushState({}, "", pathname);
+    this.history.pushState({}, ``, pathname);
     this._onRoute(pathname);
   }
 

@@ -9,15 +9,20 @@ export interface IBlock extends Block<TAll> {
 
 export class Route {
   private _pathname: string;
+
   private _blockClass: IBlock;
+
   private _block: null | InstanceType<IBlock>;
+
   private _props: TList;
+
   private _blockProps: TAll | null | undefined;
+
   constructor(
     pathname: string,
     view: IBlock,
     props: TList,
-    blockProps: TAll | null | undefined
+    blockProps: TAll | null | undefined,
   ) {
     this._pathname = pathname;
     this._blockClass = view;

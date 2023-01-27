@@ -18,7 +18,7 @@ export const pageProfileProps = {
   profileUpdate: profileEditLink,
   profilePassword: profilePasswordLink,
   // userName: `Avital`,
-  profileForm: profileForm,
+  profileForm,
   attrs: {
     class: `profile-page`,
   },

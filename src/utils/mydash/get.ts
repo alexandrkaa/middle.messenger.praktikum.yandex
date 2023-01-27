@@ -1,6 +1,8 @@
 type Primitive = string | number | boolean;
-export interface SafeNestedMap
-  extends Record<string | number | symbol, Primitive | SafeNestedMap> {}
+type StOrNum = string | number;
+export type SafeNestedMap = {
+  [key in StOrNum]: SafeNestedMap;
+};
 
 const isPrimitive = (val: unknown): boolean => {
   switch (typeof val) {
@@ -23,15 +25,14 @@ export const get = (
   const pathArr: string[] = path.split(`.`);
   let result: SafeNestedMap | Primitive | undefined = obj[pathArr[0]];
   if (isPrimitive(result)) {
-    return result as Primitive;
-  } else {
-    for (let i = 1; i < pathArr.length; i++) {
-      if (result !== undefined && result instanceof Object) {
-        result = result[pathArr[i]];
-      } else {
-        return defaultValue !== undefined ? defaultValue : undefined;
-      }
-    }
-    return result as Primitive | undefined;
+    return result as unknown as Primitive;
   }
+  for (let i = 1; i < pathArr.length; i++) {
+    if (result !== undefined && result instanceof Object) {
+      result = result[pathArr[i]];
+    } else {
+      return defaultValue !== undefined ? defaultValue : undefined;
+    }
+  }
+  return result as unknown as Primitive | undefined;
 };

@@ -1,4 +1,4 @@
-export const tpl: string = `
+export const tpl = `
   <img
     src="{{#if avatar}}{{avatar}}{{else}}https://via.placeholder.com/32{{/if}}"
     class="chat-text-block__avatar"

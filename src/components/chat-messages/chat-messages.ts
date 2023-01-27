@@ -17,7 +17,7 @@ export interface TChatMsgsProps extends TAll {
 }
 
 class ChatMessages extends Block<TChatMsgsProps> {
-  constructor(props: TChatMsgsProps, tagName: string = `ul`) {
+  constructor(props: TChatMsgsProps, tagName = `ul`) {
     super(props, tagName);
   }
 
@@ -27,14 +27,14 @@ class ChatMessages extends Block<TChatMsgsProps> {
 
   componentDidUpdate(
     oldProps: TChatMsgsProps,
-    newProps: TChatMsgsProps
+    newProps: TChatMsgsProps,
   ): boolean {
     if (!isEqual(oldProps, newProps)) {
       this.children.messages = newProps.storedMessages?.map((msg: TMessage) => {
         const dt = new Date(msg.time as string);
         const isSelf = newProps.userId === msg.user_id;
         return new ChatMessage({
-          isSelf: isSelf,
+          isSelf,
           text: msg.content,
           time: `${dt.getHours()}:${dt.getMinutes()}`,
           datetime: msg.time,

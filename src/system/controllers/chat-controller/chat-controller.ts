@@ -1,9 +1,14 @@
-import { ChatAPI, TChat, TChatId, TUser, TUsers } from "../../api/chat/chat";
-import { TMessage } from "../../ws/ws";
+import {
+  ChatAPI,
+  TChat,
+  TChatId,
+  TUser,
+  TUsers,
+  TChatObj,
+} from "../../api/chat/chat";
+import WSocket, { TMessage } from "../../ws/ws";
 import { TOptions } from "../../http-transport/http-transport";
 import { store } from "../../store/store";
-import { TChatObj } from "../../api/chat/chat";
-import WSocket from "../../ws/ws";
 import { WEB_SOCKET_EVENTS } from "../../../consts/consts";
 import { findToken } from "../../../utils/find-token";
 
@@ -15,7 +20,9 @@ const chatApi = new ChatAPI();
 
 class ChatController {
   private WSockets: Record<number, WSocket> = {};
+
   static __instance: ChatController;
+
   constructor() {
     if (ChatController.__instance) {
       return ChatController.__instance;
@@ -68,7 +75,7 @@ class ChatController {
     if (!this.WSockets[chatId]) {
       let _token = findToken(store.getState().chats, chatId);
       if (!_token) {
-        await this.getToken({ data: { chatId: chatId } });
+        await this.getToken({ data: { chatId } });
         _token = findToken(store.getState().chats, chatId) as string;
       }
       this.WSockets[chatId] = new WSocket(
@@ -95,7 +102,7 @@ class ChatController {
     let start = 0;
     while (unreadCnt >= 0) {
       this.WSockets[chatId].getUnread(start);
-      start = start + 20;
+      start += 20;
       unreadCnt -= 20;
     }
   }
@@ -115,7 +122,6 @@ class ChatController {
   }
 
   public async createChat(data: TChat) {
-    const self = this;
     return chatApi
       .createChat(data)
       .then((res: TResponse) => {
@@ -123,7 +129,7 @@ class ChatController {
         // return store.set("chats", JSON.parse(res.response));
       })
       .then(() => {
-        self.chats();
+        this.chats();
       })
       .catch((err) => {
         console.log(JSON.parse(err.responseText));
@@ -133,9 +139,7 @@ class ChatController {
   public async chats(data?: TOptions) {
     return chatApi
       .fetchChats(data)
-      .then((res: TResponse) => {
-        return store.set(`chats`, JSON.parse(res.response));
-      })
+      .then((res: TResponse) => store.set(`chats`, JSON.parse(res.response)))
       .catch((err) => {
         console.log(JSON.parse(err.responseText));
       });
@@ -172,9 +176,7 @@ class ChatController {
     // const self = this;
     return chatApi
       .addUserToChat(data)
-      .then((res: TResponse) => {
-        return JSON.parse(res.response);
-      })
+      .then((res: TResponse) => JSON.parse(res.response))
       .catch((err) => console.log(JSON.parse(err.responseText)));
   }
 
@@ -182,21 +184,17 @@ class ChatController {
     // const self = this;
     return chatApi
       .removeUserFromChat(data)
-      .then((res: TResponse) => {
-        return JSON.parse(res.response);
-      })
+      .then((res: TResponse) => JSON.parse(res.response))
       .catch((err) => console.log(JSON.parse(err.responseText)));
   }
 
   public async getToken(data: TChatId) {
-    const chats = store.getState().chats;
-    const activeChatId = store.getState().activeChatId;
+    const { chats } = store.getState();
+    const { activeChatId } = store.getState();
     if (!chats.find((chat: TChatObj) => chat.id === activeChatId)?.token) {
       return chatApi
         .getToken(data)
-        .then((res: TResponse) => {
-          return JSON.parse(res.response);
-        })
+        .then((res: TResponse) => JSON.parse(res.response))
         .then((data) => {
           const newChats = chats.map((chat: TChatObj) => {
             if (chat.id === activeChatId) {
@@ -213,12 +211,8 @@ class ChatController {
   public getUnread(data: TChatId) {
     return chatApi
       .getUnread(data)
-      .then((res: TResponse) => {
-        return JSON.parse(res.response);
-      })
-      .then((data) => {
-        return data;
-      });
+      .then((res: TResponse) => JSON.parse(res.response))
+      .then((data) => data);
   }
 }
 

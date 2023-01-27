@@ -1,4 +1,4 @@
-export const tpl: string = `
+export const tpl = `
 
   <section class="modal-content">
     {{{modalContent}}}

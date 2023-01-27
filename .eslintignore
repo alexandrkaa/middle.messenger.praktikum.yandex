@@ -1,5 +1,9 @@
 /dist
 **/*.min.js
 /node_modules
-postcss.config.js
 handlebars.config.js
+**/*.spec.ts
+server/app.js
+.parcel-cache/
+**/*.min.js
+webpack.config.js

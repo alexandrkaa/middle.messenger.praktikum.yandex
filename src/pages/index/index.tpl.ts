@@ -1,4 +1,4 @@
-export const tpl: string = `
+export const tpl = `
 <nav class="menu">
   <h1>Menu</h1>
   <ul class="menu-list">

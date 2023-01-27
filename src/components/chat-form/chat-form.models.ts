@@ -17,7 +17,7 @@ function submitHandler(evt: SubmitEvent) {
           // console.info(input.value, this.props.activeChatId);
           chatController.sendMessage(
             data.message as string,
-            this.props.activeChatId
+            this.props.activeChatId,
           );
           input.value = ``;
         }

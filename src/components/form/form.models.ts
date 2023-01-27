@@ -24,13 +24,18 @@ import {
 
 import ChatController from "../../system/controllers/chat-controller/chat-controller";
 import { LOGIN_LENGTH } from "../../consts/consts";
+import { TChat } from "../../system/api/chat/chat";
+
+// type data = {
+//   data: Record<string, unknown>;
+// };
 
 const chatController = new ChatController();
 
 function onFormSubmit(
   target: HTMLFormElement,
   dataField: string,
-  action: Function
+  action: (data: TChat) => void
 ): void {
   const formData = new FormData(target);
   const title = formData.get(`form-field`) as string;
@@ -39,7 +44,7 @@ function onFormSubmit(
       [dataField]: title,
     },
   };
-  action(data);
+  action(data as TChat);
 }
 
 const focusEvent = new FocusEvent(`focusout`, {
@@ -50,7 +55,7 @@ const focusEvent = new FocusEvent(`focusout`, {
 
 function formValidate(evt: SubmitEvent): void {
   evt.preventDefault();
-  let isValid: boolean = true;
+  let isValid = true;
   this.hasError = false;
   const fields = this.children.enterFields;
   for (const field of fields) {
@@ -140,7 +145,7 @@ async function searchUserOnKeyUp(evt: Event): Promise<void> {
     };
     const users = await chatController.searchUserByLogin(data);
     this.data = {
-      users: users,
+      users,
     };
   }
 }

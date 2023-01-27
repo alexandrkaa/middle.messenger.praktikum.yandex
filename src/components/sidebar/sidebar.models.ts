@@ -12,10 +12,10 @@ function onSideBarClick(evt: Event): void {
 }
 
 const sProps = {
-  profileLink: profileLink,
+  profileLink,
   addChatBtn: addChatButton,
   chatTabs: [],
-  addChatFormModal: addChatFormModal,
+  addChatFormModal,
   attrs: {
     class: `chat__chats-list-block`,
   },

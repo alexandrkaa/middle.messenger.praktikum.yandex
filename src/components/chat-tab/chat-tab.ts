@@ -13,7 +13,7 @@ interface TChatTabProps extends TAll {
 }
 
 export default class ChatTab extends Block<TChatTabProps> {
-  constructor(props: TChatTabProps, tagName: string = `li`) {
+  constructor(props: TChatTabProps, tagName = `li`) {
     super(props, tagName);
   }
 

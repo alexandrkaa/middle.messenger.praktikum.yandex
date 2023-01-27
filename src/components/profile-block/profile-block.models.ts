@@ -56,16 +56,15 @@ const fieldsPassword = [
 ];
 
 export const profileBlocks = fields.map(
-  (field) =>
-    new ProfileBlock({
-      title: field.title,
-      value: field.value,
-      formName: field.formName,
-      type: field.type,
-      attrs: {
-        class: `profile-block`,
-      },
-    })
+  (field) => new ProfileBlock({
+    title: field.title,
+    value: field.value,
+    formName: field.formName,
+    type: field.type,
+    attrs: {
+      class: `profile-block`,
+    },
+  }),
 );
 
 export const profileBlocksEdit = [
@@ -97,14 +96,13 @@ export const profileBlocksEdit = [
 });
 
 export const profileBlocksPassword = fieldsPassword.map(
-  (field) =>
-    new ProfileBlockEdit({
-      title: field.title,
-      value: field.value,
-      formName: field.formName,
-      type: field.type,
-      attrs: {
-        class: `profile-block`,
-      },
-    })
+  (field) => new ProfileBlockEdit({
+    title: field.title,
+    value: field.value,
+    formName: field.formName,
+    type: field.type,
+    attrs: {
+      class: `profile-block`,
+    },
+  }),
 );

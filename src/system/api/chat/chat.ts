@@ -53,7 +53,7 @@ class ChatAPI extends BaseAPI {
 
   public getToken(optionsAndData: TChatId): Promise<unknown> {
     return chatAPIInstance.post(
-      `${CHATS_BASE_URL}/token/${optionsAndData.data.chatId}`
+      `${CHATS_BASE_URL}/token/${optionsAndData.data.chatId}`,
     );
   }
 
@@ -83,7 +83,7 @@ class ChatAPI extends BaseAPI {
     }
     return chatAPIInstance.post(
       `${USER_BASE_URL}/${optionsAndData.data.id}`,
-      optionsAndData
+      optionsAndData,
     );
   }
 
@@ -93,7 +93,7 @@ class ChatAPI extends BaseAPI {
     }
     return chatAPIInstance.get(
       `${CHATS_BASE_URL}/new/${optionsAndData.data.chatId}`,
-      optionsAndData
+      optionsAndData,
     );
   }
 }

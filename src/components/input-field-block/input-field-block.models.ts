@@ -223,5 +223,5 @@ export const password2Field = new InputFieldBlock(passwordProps2);
 export const addChatFormInputField = new InputFieldBlock(addChatFormInputProps);
 export const addUserFormInputField = new InputFieldBlock(addUserFormInputProps);
 export const removeUserFormInputField = new InputFieldBlock(
-  removeUserFormInputProps
+  removeUserFormInputProps,
 );

@@ -6,8 +6,8 @@ const mock = {
   result: `a=2&b=qwerty`,
 };
 
-describe("MyDash utils / queryStringify", () => {
-  it("queryStringify should works correctly", () => {
+describe(`MyDash utils / queryStringify`, () => {
+  it(`queryStringify should works correctly`, () => {
     expect(queryStringify(mock.obj1), mock.result);
   });
 });

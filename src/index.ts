@@ -17,8 +17,9 @@ import PageChat from "./pages/chat/chat";
 import { propsPageChat } from "./pages/chat/chat.models";
 
 import { APP_MOUNT_POINT } from "./consts/consts";
+
 export const router = new Router(APP_MOUNT_POINT);
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener(`DOMContentLoaded`, () => {
   router
     // .use(routesPaths.MAIN, IndexPage as unknown as IBlock, null)
     .use(routesPaths.MAIN, PageChat as unknown as IBlock, propsPageChat)
@@ -28,17 +29,17 @@ window.addEventListener("DOMContentLoaded", () => {
     .use(
       routesPaths.PROFILE_PASSWORD,
       PageProfile as unknown as IBlock,
-      pageProfilePasswordProps
+      pageProfilePasswordProps,
     )
     .use(
       routesPaths.PROFILE,
       PageProfile as unknown as IBlock,
-      pageProfileProps
+      pageProfileProps,
     )
     .use(
       routesPaths.PROFILE_EDIT,
       PageProfile as unknown as IBlock,
-      pageProfileEditProps
+      pageProfileEditProps,
     )
     .use(routesPaths.SIGN_UP, PageEnter as unknown as IBlock, signUpProps)
     .use(routesPaths.SIGN_IN, PageEnter as unknown as IBlock, signInProps)

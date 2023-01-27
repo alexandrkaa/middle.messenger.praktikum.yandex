@@ -10,8 +10,8 @@ const mock = {
 
 const testRange = (val: number) => JSON.stringify(range(val));
 
-describe("MyDash utils / Range", () => {
-  it("Range should return correct array", () => {
+describe(`MyDash utils / Range`, () => {
+  it(`Range should return correct array`, () => {
     expect(testRange(mock.start1)).to.equal(mock.result1);
     expect(testRange(mock.start2)).to.equal(mock.result2);
   });

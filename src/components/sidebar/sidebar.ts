@@ -31,7 +31,7 @@ function onChatTabClick(evt: Event, chatId: number): void {
 }
 
 class SideBar extends Block<TPageSideBar> {
-  constructor(props: TPageSideBar, tagName: string = `section`) {
+  constructor(props: TPageSideBar, tagName = `section`) {
     super(props, tagName);
   }
 

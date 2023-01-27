@@ -1,4 +1,4 @@
-export const tpl: string = `
+export const tpl = `
   <img
     src="{{avatar}}"
     class="chat-tab__avatar"

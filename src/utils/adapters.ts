@@ -25,30 +25,26 @@ export type TSignUpBData = {
   avatar?: string | null | undefined;
 };
 
-export const signUpFBAdapter = (data: TSignUpFData): TSignUpBData => {
-  return {
-    first_name: data.firstName,
-    second_name: data.secondName,
-    login: data.login,
-    email: data.email,
-    password: data.password,
-    phone: data.phone,
-    display_name: data.displayName,
-    id: data?.id,
-    avatar: data?.avatar,
-  };
-};
+export const signUpFBAdapter = (data: TSignUpFData): TSignUpBData => ({
+  first_name: data.firstName,
+  second_name: data.secondName,
+  login: data.login,
+  email: data.email,
+  password: data.password,
+  phone: data.phone,
+  display_name: data.displayName,
+  id: data?.id,
+  avatar: data?.avatar,
+});
 
-export const signUpBFAdapter = (data: TSignUpBData): TSignUpFData => {
-  return {
-    firstName: data.first_name,
-    secondName: data.second_name,
-    login: data.login,
-    email: data.email,
-    password: data.password,
-    phone: data.phone,
-    displayName: data.display_name,
-    id: data?.id,
-    avatar: data?.avatar,
-  };
-};
+export const signUpBFAdapter = (data: TSignUpBData): TSignUpFData => ({
+  firstName: data.first_name,
+  secondName: data.second_name,
+  login: data.login,
+  email: data.email,
+  password: data.password,
+  phone: data.phone,
+  displayName: data.display_name,
+  id: data?.id,
+  avatar: data?.avatar,
+});

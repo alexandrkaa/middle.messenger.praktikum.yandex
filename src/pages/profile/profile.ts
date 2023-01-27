@@ -17,7 +17,7 @@ export interface TPageProfile extends TAll {
 }
 
 class PageProfile extends Block<TPageProfile> {
-  constructor(props: TPageProfile, tagName: string = `main`) {
+  constructor(props: TPageProfile, tagName = `main`) {
     super(props, tagName);
   }
 

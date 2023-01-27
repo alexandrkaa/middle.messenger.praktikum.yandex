@@ -1,4 +1,4 @@
-export const tpl: string = `
+export const tpl = `
 
   <p class="profile-form__title">{{title}}</p>
   <input

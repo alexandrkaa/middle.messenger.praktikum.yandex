@@ -1,10 +1,11 @@
+// eslint-disable-next-line
 export type Indexed<T = any> = {
   [key in string]: T;
 };
 
 function merge(lhs: Indexed, rhs: Indexed): Indexed {
   for (const p in rhs) {
-    if (!rhs.hasOwnProperty(p)) {
+    if (!Object.prototype.hasOwnProperty.call(rhs, p)) {
       continue;
     }
 

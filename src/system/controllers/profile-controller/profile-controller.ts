@@ -17,9 +17,7 @@ class ProfileController {
   public async updateProfile(data: TReg) {
     return profileApi
       .updateProfile(data)
-      .then((res: TResponse) => {
-        return store.set("user", signUpBFAdapter(JSON.parse(res.response)));
-      })
+      .then((res: TResponse) => store.set(`user`, signUpBFAdapter(JSON.parse(res.response))))
       .then(() => {
         router.go(routesPaths.PROFILE);
       })
@@ -29,12 +27,10 @@ class ProfileController {
   public async updateAvatar(data: TReg) {
     return profileApi
       .updateAvatar(data)
-      .then((res: TResponse) => {
-        return store.set(
-          "user.avatar",
-          signUpBFAdapter(JSON.parse(res.response)).avatar
-        );
-      })
+      .then((res: TResponse) => store.set(
+        `user.avatar`,
+        signUpBFAdapter(JSON.parse(res.response)).avatar,
+      ))
       .then(() => {
         router.go(routesPaths.PROFILE);
       })

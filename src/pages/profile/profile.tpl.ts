@@ -1,4 +1,4 @@
-export const tpl: string = `
+export const tpl = `
 
   <article class="profile">
     {{{profileBack}}}
